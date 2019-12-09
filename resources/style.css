@@ -1,30 +1,13 @@
-body {
-    background-color: black;
-    text-align: center;
+nav {
+    height: 64px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
 }
-h1, h3 { 
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.nav {
+    display: flex;
+    margin-right: 24px;
 }
-a {
-    color: aquamarine;
-    font-size: 16px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.title {
-    font-weight: normal;
-    font-size: 50px;
-}
-h3 {
-    font-size: 21px;
-    color: gray;
-}
-.info {
-    font-weight: 300;
-    font-size: 42px;
-}
-footer div {
-    text-align: right;
-    color: gray;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.nav ul {
+    margin-right: 16px;
 }
