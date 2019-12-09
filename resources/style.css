@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+    text-align: center;
+}
+h1, h3 { 
+    color: white;
+    font-family: Verdana;
+}
+a {
+    color: aquamarine;
+    font-size: 16px;
+    font-family: Verdana;
+}
+.title {
+    font-weight: normal;
+    font-size: 50px;
+}
+h3 {
+    font-size: 21px;
+    color: gray;
+}
+.info {
+    font-weight: 300;
+    font-size: 42px;
+}
