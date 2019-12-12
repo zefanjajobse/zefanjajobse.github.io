@@ -1,3 +1,7 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #4A4A4A;
+}
 header {
     top: 0px;
     height: 64px;
@@ -17,17 +21,20 @@ header {
 }
 .logo span {
     text-transform: uppercase;
+    font-size: 21px;
+    color: #4a4a4a;
 }
 .logo .bold {
     font-weight: bold;
 }
-nav {
+header nav {
     display: flex;
     height: 64px;
     align-items: center;
     position: absolute;
     right: 24px;
     flex-wrap: wrap;
+    color: #4a4a4a;
 }
 .nav ul {
     margin-right: 16px;
@@ -37,21 +44,29 @@ nav {
     margin-top: 64px;
     padding: 32px 24px;
     display: flex;
-    background-color: lightgray;
+    color: #4a4a4a;
+    background-color: #EAEBEC;
+}
+.banner .text {
+    margin: 0 24px;
+    display: flex;
+    align-items: center;
 }
 .banner img {
     width: 60%;
     margin-right: 24px;
 }
 .banner a {
-    background-color: gray;
+    background-color: #4A4A4A;
     padding: 8px 30%;
     color: white;
+    text-decoration: none;
 }
 .information {
     display: flex;
 }
 .information .big {
+    border-right: 1px solid lightgray;
     width: 60%;
     padding: 32px 24px;
 }
@@ -67,29 +82,72 @@ nav {
 .information .block {
     display: flex;
     flex-wrap: nowrap;
-    border: lightgray 1px solid;
+    border-bottom: lightgray 1px solid;
+    align-items: center;
+}
+.information .photo {
+    width: 35%;
+    margin: 16px;
 }
 .information .photo img {
     width: 100%;
     height: auto;
-    margin: 16px;
 }
 .information .text {
     width: 65%;
 }
 
 .courses {
-    margin: 32px 72px;
-    text-align: left;
-    background-color: lightgray;
+    text-align: center;
+    background-color: #EAEBEC;
+}
+.courses h1 {
+    padding-top: 32px;
 }
 .courses .grid {
+    margin: 32px 72px;
     display: flex;
+    text-align: left;
     flex-wrap: wrap;
 }
 .courses .course {
     margin: 32px;
+    background-color: white;
 }
 .courses .course img {
     height: auto;
+}
+.courses .course .text {
+    margin: 16px;
+    margin-bottom: 24px;
+}
+.thesis {
+}
+.thesis h1 {
+    margin: 32px 0;
+    text-align: center;
+}
+.thesis .left {
+    width: 60%;
+    margin: 24px;
+}
+.thesis .left video {
+    width: 100%;
+}
+footer {
+    margin-top: 32px;
+    border-top: 1px solid lightgray;
+    padding-top: 16px;
+    margin-left: 24px;
+}
+footer .footer {
+    position: absolute;
+    left: 24px;
+    display: flex;
+    margin-bottom: 32px;
+}
+footer nav {
+    position: absolute;
+    right: 24px;
+    display: flex;
 }
