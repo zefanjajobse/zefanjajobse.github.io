@@ -81,6 +81,7 @@ nav {
 .courses {
     margin: 32px 72px;
     text-align: center;
+    background-color: lightgray;
 }
 .courses .grid {
     display: flex;
