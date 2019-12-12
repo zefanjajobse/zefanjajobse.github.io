@@ -80,7 +80,7 @@ nav {
 
 .courses {
     margin: 32px 72px;
-    text-align: center;
+    text-align: left;
     background-color: lightgray;
 }
 .courses .grid {
