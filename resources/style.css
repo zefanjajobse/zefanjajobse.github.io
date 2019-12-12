@@ -1,13 +1,94 @@
-nav {
+header {
+    top: 0px;
     height: 64px;
     width: 100%;
     background-color: white;
     position: fixed;
 }
-.nav {
+.logo {
+    position: absolute;
+    left: 24px;
     display: flex;
-    margin-right: 24px;
+    height: 64px;
+    align-items: center;
+}
+.logo img {
+    height: 32px;
+}
+.logo span {
+    text-transform: uppercase;
+}
+.logo .bold {
+    font-weight: bold;
+}
+nav {
+    display: flex;
+    height: 64px;
+    align-items: center;
+    position: absolute;
+    right: 24px;
+    flex-wrap: wrap;
 }
 .nav ul {
     margin-right: 16px;
+}
+
+.banner {
+    margin-top: 64px;
+    padding: 32px 24px;
+    display: flex;
+    background-color: lightgray;
+}
+.banner img {
+    width: 60%;
+    margin-right: 24px;
+}
+.banner a {
+    background-color: gray;
+    padding: 8px 30%;
+    color: white;
+}
+.information {
+    display: flex;
+}
+.information .big {
+    width: 60%;
+    padding: 32px 24px;
+}
+.information .big img {
+    margin-right: 24px;
+    width: 100%
+}
+.information .textarea {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+.information .block {
+    display: flex;
+    flex-wrap: nowrap;
+    border: lightgray 1px solid;
+}
+.information .photo img {
+    width: 100%;
+    height: auto;
+    margin: 16px;
+}
+.information .text {
+    width: 65%;
+}
+
+.courses {
+    margin: 32px 72px;
+    text-align: center;
+}
+.courses .grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.courses .course {
+    margin: 32px;
+}
+.courses .course img {
+    height: auto;
 }
