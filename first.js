@@ -48,8 +48,8 @@ var myscndStr = "This is the first sentence. ";
 myscndStr += "This is the second sentence."
 
 // instead of name.replace('Old', 'New') you can use: firtname[1]
-var firstName = "Ada";
-var secondLetterOfFirstName = firstName[1];
+//var firstName = "Ada";
+//var secondLetterOfFirstName = firstName[1];
 
 /**
  * == gelijk aan
