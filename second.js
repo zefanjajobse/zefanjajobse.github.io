@@ -113,3 +113,12 @@ function bmitest(length, weight) {
 }
 
 console.log(uitslag)
+
+/**
+ * function test (myCondition) {
+ *  if (myCondition) {
+ *     return "It was true"; -- return returns request even if there is code left beneath it
+ *  }
+ *  return "It was false";
+ * }
+ */
