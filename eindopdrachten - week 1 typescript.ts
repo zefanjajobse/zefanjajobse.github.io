@@ -7,7 +7,7 @@ function checker(numbers:number) {
         return numbers + " is an even number"
     // if number is uneven
     } else if ((numbers % 2) == 1) {
-        return numbers + "is isn't an even number"
+        return numbers + " isn't an even number"
     // if value is string
     } else {
         return "This is invalid"   
