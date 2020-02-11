@@ -7,6 +7,8 @@
  * }
  * Else {
  * }
+ * variable types: var const let
+ * number int string boolean
  */
 
 // testapp
@@ -79,3 +81,9 @@ var temperture = (9 / 5) * tempC + 32
 var hz = 'Please visit the HZ University of applied science';
 var newhz = hz.replace('applied', 'mad');
 console.log(newhz);
+
+const sentance = "programming is not co cool";
+const firstPartOfSentence = sentance.substr(0,14);
+const secondPartOfSentence = sentance.substr(18);
+HTMLFormControlsCollection.log(firstPartOfSentence + secondPartOfSentence);
+
