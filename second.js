@@ -122,3 +122,12 @@ console.log(uitslag)
  *  return "It was false";
  * }
  */
+
+var now = Date.now();
+var time1 = //whatever time1 is
+var time2 = //whatever time2 is
+
+if (now > time1 && now < time2)
+{
+    alert("blah"):
+}
