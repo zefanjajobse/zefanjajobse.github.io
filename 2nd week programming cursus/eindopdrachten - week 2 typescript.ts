@@ -3,7 +3,7 @@
  */
 // create variable
 
-function grade(number:number) {
+function grade(number: number) {
     // if var is less then 6 result = onvoldoende
     if (number < 6) {
         return "onvoldoende";
@@ -14,7 +14,7 @@ function grade(number:number) {
     } else if (number > 9) {
         return "uitmuntend";
     } else {
-    // after all else fails return invalid
+        // after all else fails return invalid
         return "invalid";
     }
 }
@@ -23,7 +23,7 @@ function grade(number:number) {
  * resultaat checker, switch versie
  */
 
-function gradeswitch(number:number) {
+function gradeswitch(number: number) {
     switch (true) { // choose case if true
         // if var is less then 6 result = onvoldoende
         case (number < 6):
@@ -32,14 +32,14 @@ function gradeswitch(number:number) {
         case (number >= 6 && number < 7):
             return "voldoende";
             break;
-        case (number >=7 && number <= 9):
+        case (number >= 7 && number <= 9):
             return "goed";
             break;
         case (number > 9):
             return "uitmuntend";
             break;
-        default: 
-        // after all else fails return invalid
+        default:
+            // after all else fails return invalid
             return "invalid"
             break;
     }

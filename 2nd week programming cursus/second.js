@@ -124,10 +124,10 @@ console.log(uitslag)
  */
 
 var now = Date.now();
-var time1 = //whatever time1 is
-var time2 = //whatever time2 is
+var time1 = 3;//whatever time1 is
+var time3 = 4;//whatever time3 is
 
-if (now > time1 && now < time2)
+if (now > time1 && now < time3)
 {
-    alert("blah"):
+    alert("blah");
 }
