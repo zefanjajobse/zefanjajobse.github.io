@@ -92,14 +92,15 @@ function factorial(num) {
 
  /**
   * instead of for looping through items in a array
-  */
- for (let index = 0; index < array.length; index++) {
-     const element = array[index];
-     
- }
- /**
+  *
+  * for (let index = 0; index < array.length; index++) {
+  *   const element = array[index];
+  *   
+  * }
+  *
   * do
+  *
+  * array.forEach(element => {
+  *  
+  * });
   */
- array.forEach(element => {
-     
- });
