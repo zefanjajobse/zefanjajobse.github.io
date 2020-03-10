@@ -76,3 +76,26 @@ const newproductprices = productPrices.filter(function(val, index){
 })
 
 console.log(newproductprices)
+
+/**
+ * var myRand = Math.floor(Math.random () * (max - min + 1) + min);
+ * eerst doet hij het minimale eraf halen met +1 om bijv de 10 te halen bij max 10 en dan * math.random, math.random word nooit meer dan 1 dus ook nooit meer dan 10, dan doe je het minimale er weer bij zodat het altijd hoger is dan min.
+ */
+
+/**
+ * alles samenvoegen met *
+ */
+function multiplyAll(arr) {
+  var product = 1;
+  // open eerste array
+  for (var i=0; i < arr.length; i++) {
+      // open de tweede array in de eerste array
+    for (var j=0; j < arr[i].length; j++) {
+        // spreek elk item aan in de 2e arrays
+      product = product * arr[i][j]
+    }
+  }
+  return product;
+}
+
+console.log(multiplyAll([[1,2],[3,4],[5,6,7]]))
