@@ -99,3 +99,49 @@ function multiplyAll(arr) {
 }
 
 console.log(multiplyAll([[1,2],[3,4],[5,6,7]]))
+
+// findAverage("parameter", y) {"function body" "in scope of function"}
+// "out of scope of function"
+// var avg = findAverage(argument, 9);
+// if a variable is declared in a function, its only visable inside the function, otherwise its global
+// if you change a variable inside a function for a global variable, it will remain changed.
+// code hoisting, https://classroom.udacity.com/courses/ud803/lessons/a7c5b540-51a6-44dc-b2f2-515c9dd6ca4f/concepts/86acf25e-7511-4f3a-927e-050899ec87da
+
+/*
+ * Programming Quiz: Build A Triangle (5-3)
+ */
+
+// creates a line of * for a given length
+function makeLine(length) {
+    var line = "";
+    for (var j = 1; j <= length; j++) {
+        line += "* ";
+    }
+    return line + "\n";
+}
+
+// your code goes here.  Make sure you call makeLine() in your own code.
+function buildTriangle (num) {
+    var complete = "";
+    for (var i=1; i <= num; i++) {
+        complete += makeLine(i);
+    }
+    return complete
+}
+
+// test your code by uncommenting the following line
+console.log(buildTriangle(10));
+
+/**
+ * call a function with a function
+ */
+// Function declaration that takes in two arguments: a function for displaying
+// a message, along with a name of a movie
+function movies(messageFunction, name) {
+    messageFunction(name);
+  }
+  
+  // Call the movies function, pass in the function and name of movie
+  movies(function displayFavorite(movieName) {
+    console.log("My favorite movie is " + movieName);
+  }, "Finding Nemo");
