@@ -267,3 +267,156 @@ const paragraphElements = document.querySelectorAll('p');
 for (let i = 0; i < paragraphElements.length; i++) {
     console.log(paragraphElements[i]);
 }
+
+/**
+ * .innerHTML - select the html inside of the element in a string
+ * and display added html as hmtl
+ */
+/**
+ * .outerhtml - select itself and inside of the element in a string
+ */
+/**
+ * .textContent - select only the text inside the element in a string
+ * it will display the html you added to text content as text
+ */
+/**
+ * replace the text of a element - card.textContent = "newtext";
+ */
+
+ /**
+  * .innerText - will return the text as seen in visual website, when its made all caps in css.
+  * it will be all caps there.
+  */
+
+// create a paragraph element <p>
+const conainer = document.createElement('span');
+// add text to the element
+conainer.textContent = ', right now!';
+// add the text to the end
+const mainHeading = document.querySelector('p');
+
+mainHeading.appendChild(conainer);
+// with appendChild you can only add it once or it will be moved to the new location.
+
+/**
+ * document.createTextNode(''); - create a new text node to a to a paragraph
+ */
+const myPara = document.createElement('p');
+const textOfParagraph = document.createTextNode('I am the text for the text node'); //create text node to later add to paragraph
+myPara.appendChild(textOfParagraph);
+document.body.appendChild(myPara);
+
+/**
+ * for textContent, same result:
+ * 
+ * const myPara = document.createElement('p');
+ * myPara.textContent = 'I am the text for the paragraph!';
+ * document.body.appendChild(myPara);
+ */
+
+ /**
+  * .insertAdjecentHTML - insert on a specified location
+  * .insertAdjecentHTML('afterend', 'text to add'); - only text dont use html tags
+  * beforebegin - add above the element
+  * afterbegin - add above inside the element
+  * beforend - add at bottom inside the element
+  * afterend - add at below the element 
+  */
+
+/**
+ * <!-- beforebegin -->
+ * <p>
+ *   <!-- afterbegin -->
+ *   foo
+ *   <!-- beforeend -->
+ * </p>
+ * <!-- afterend -->
+ */
+
+ const testie = mainHeading.firstElementChild // select the first child of main heading
+
+ mainHeading.removeChild(testie); // remove the selected first child from the main heading element.
+ 
+/**
+ * remove h1 by selecting h1's parent element and then removing the child (the element itself)
+ */
+
+const meanheading = document.querySelector('h1');
+
+meanheading.parentElement.removeChild(mainHeading);
+
+/**
+ * remove h1 by selecting h1 itself
+ */
+
+const meanheader = document.querySelector('h1');
+
+//meanheader.remove();
+
+/**
+ * change the style of a element
+ */
+
+const messd = document.querySelector('h1');
+
+messd.style.color = 'red';
+messd.style.backgroundColor = 'orange';
+messd.style.fontSize = '3.5em';
+
+/**
+ * do all those style changes as one command
+ */
+
+messd.style.cssText = 'color: blue; background-color: orange; font-size: 3.5em';
+
+/**
+ * with cssText you need to spell it with a line example:
+ * background-color.
+ * and for style:
+ * backgroundColor.
+ */
+
+/**
+ * or use setattribute, to do styles or other attributes of h1
+ */
+
+messd.setAttribute('style', 'color: blue; background-color: orange; font-size: 3.5em');
+
+const mend = document.querySelector('#one');
+const listOfClasses = mend.className;
+console.log(listOfClasses)
+
+/**
+ * The .classList property has a number of properties of its own. Some of the most popularly used ones are:
+ *
+ * .add() - to add a class to the list
+ * .remove() - to remove a class from the list
+ * .toggle() - to add the class if it doesn't exists or remove it from the list if it does already exist
+ * .contains() - returns returns a boolean based on if the class exists in the list or not
+ * Let's take a look!
+ */
+
+ /**
+  * monitor events via chrome
+  */
+
+//monitorEvents(document);
+//unmonitorEvents(document);
+
+/**
+ * do something with the event
+ */
+
+// diffent types of events to listen for:
+// click
+// dblclick
+// scroll
+// resize
+
+// https://developer.mozilla.org/en-US/docs/Web/Events
+
+const headding = document.querySelector('h1');
+
+headding.addEventListener('click', function () {
+  console.log('The heading was clicked!');
+});
