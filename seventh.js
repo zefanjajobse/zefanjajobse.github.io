@@ -420,3 +420,101 @@ const headding = document.querySelector('h1');
 headding.addEventListener('click', function () {
   console.log('The heading was clicked!');
 });
+
+console.log({ name: 'Richard' } === { name: 'Richard' })
+
+// ex 2
+
+function myEventListeningFunction() {
+  console.log('howdy');
+}
+
+// adds a listener for clicks, to run the `myEventListeningFunction` function
+document.addEventListener('click', myEventListeningFunction);
+
+// immediately removes the click listener that should run the `myEventListeningFunction` function
+document.removeEventListener('click', myEventListeningFunction);
+
+
+// will run during the bubbeling fase bottom to top in element view 
+/** the default for the third element is false, bubbeling phase */
+document.addEventListener('click', function () {
+  console.log('The document was clicked');
+});
+
+// will run earlier during the capturing phase top to bottom in element view
+/**
+* the true at the end makes the difference
+*/
+document.addEventListener('click', function () {
+  console.log('The document was clicked');
+}, true);
+
+// it will also run body first instead of whole document in false because in bubbleing it will run from bottom to top
+
+// if you put something in the function("tag") it can be used somewhere else in the function example:
+document.addEventListener('click', function (event) {
+  console.log(event);
+});
+
+/**
+ * prevent the default action (in this example clicking the link)
+ */
+
+//select all link elements (a)
+const links = document.querySelectorAll('a');
+//select the third of all links
+const thirdLink = links[2];
+
+thirdLink.addEventListener('click', function (event) {
+  //prevent the default action
+    event.preventDefault();
+    //and do this instead.
+    console.log("Look, ma! We didn't navigate to a new page!");
+});
+
+/**
+ * load right after the whole dom is loaded without it running other code first
+ * <script>
+ *     document.addEventListener('DOMContentLoaded', function () {
+ *         document.querySelector('footer').style.backgroundColor = 'purple';
+ *     });
+ *   </script>
+ */
+
+ /**
+  * run the same code but only add it after the loop is done saving time by not having to rerender part of the page
+  * const framgment = document.createDocumentFragment(); // create a document fragment to temporary save the output of the loop
+  * 
+  * for (let i = 0; i < 200; i++) { //create a loop
+  * const newElement = document.createElement('p') // create the p element 200 times
+  * newElement.innerText = 'This is paragraph number ' + i; // write something in the p element
+  * 
+  * fragment.appendChild(newElement) // add the new element as child to the temporary fragment
+  * }
+  * 
+  * document.body.appendChild(fragment); // append the made fragment to the end of the body element.
+  */
+
+// create a temporary space to do the for loop or whatever before adding it to the main element
+const fragment = document.createDocumentFragment();
+
+// add something to that fragment
+//fragment.appendChild(newelement)
+
+//add the fragment to the main dom (body)
+document.body.appendChild(fragment);
+
+// if you hide the element instead of removing it completely it takes less compute power and less time to do the task
+
+// check if a function has run for 2000 times and stop
+/**function generateParagraphs() {
+ * for (let i = 1; i <= 500; i++) {
+ *   // code
+ * }
+ * if (count < 2000)
+ * {
+ *   setTimeout(generateParagraphs, 0);
+ * }
+ }
+ */
