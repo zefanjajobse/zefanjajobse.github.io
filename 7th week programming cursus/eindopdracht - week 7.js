@@ -1,3 +1,26 @@
+tableOne = document.querySelector("table");
+sum = 0;
+sumArr = [];
+for (var i = 0, row; row = tableOne.rows[i]; i++) {
+    for (var j = 0, col; col = row.cells[j]; j++) {
+        tableTwo = col.textContent
+        if (isNaN(tableTwo)) {
+            
+        }
+        else {
+            sumArr.push(Number(tableTwo))
+        }
+
+    }
+}
+for (let index = 0; index < sumArr.length; index++) {
+    sum += sumArr[index];
+}
+sum = sum / sumArr.length;
+let total = document.createElement("td");
+total.textContent = sum;
+tableOne.append(total);
+
 /**
  * oneven andere achtergrond
  */
