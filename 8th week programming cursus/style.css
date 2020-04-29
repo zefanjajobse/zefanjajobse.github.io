@@ -33,3 +33,23 @@
     color: #3c763d;
     background-color: #dff0d8;
 }
+#button {
+    width: 100px;
+    height: 100px;
+    display: block;
+    background-color: teal;
+    text-align: center;
+}
+#boodschappen {
+    display: block;
+    width: 400px;
+}
+#buttons {
+    display: flex;
+}
+#melding {
+    color: red;
+}
+#totaal {
+    font-weight: bold;
+}
