@@ -1,0 +1,11 @@
+nav {
+    padding: 1rem 0rem 1.5rem 0rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom-style: solid;
+}
+
+nav div {
+    
+}
