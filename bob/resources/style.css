@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "Futura Hv";
+  src: url("fonts/FutuHv.ttf")
+}
+
+@font-face {
+  font-family: "FuturaBookC";
+  src: url("fonts/FuturaBookC Regular.otf")
+}
+
+body {
+  margin:0px;
+}
+
+p {
+  font-family: "FuturaBookC";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.25rem;
+  line-height: 142.37%;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.8125rem;
+  font-family: "Futura Hv";
+  font-style: normal;
+  font-weight: normal;
+}
+
+h3 {
+  font-family: "Futura Hv";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.25rem;
+  line-height: 2.6875rem;
+}
+
+nav {
+  display: flex;
+  position: fixed;
+  justify-content: space-evenly;
+  width: 100%;
+  top: 0;
+}
+
+.hero { 
+  background: url(images/image.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.text { 
+  height: 100vh;
+  position: absolute;
+}
+
+.blur{
+  -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  -ms-filter: blur(8px);
+  filter: blur(8px);
+}
+
+.main {
+  bottom: 10vh;
+  margin-left: 5vw;
+  position: fixed;
+}
+
+.text h1 {
+  color: white;
+}
+
+.text h3 {
+    color: white;
+}
+
+.about {
+  margin-left: 5vw;
+  margin-top: 10vh;
+  position: absolute;
+  z-index: 6;
+}
+
+.text {
+  width: 50%;
+}

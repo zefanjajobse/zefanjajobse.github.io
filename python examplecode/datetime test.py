@@ -12,3 +12,5 @@ print(datetime.strftime(datetime.now(), "%d %b %Y"))
 
 #for i in range(999999):
 #    print(datetime.now())
+
+print(datetime.strftime(datetime.now(), "%Y-%m-%d"))
