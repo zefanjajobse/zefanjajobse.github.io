@@ -59,8 +59,9 @@ section .list .heading {
 
 section .list .item {
     padding: .5rem;
-    margin: .5rem;
+    margin: 0 .5rem;
     background-color: gray;
+    border-radius: .1rem;
 }
 
 section .list .redo {
@@ -103,4 +104,8 @@ td {
 
 img {
     padding-right: 1rem;
+}
+
+hr {
+    border-top: 1px solid #505050;
 }
