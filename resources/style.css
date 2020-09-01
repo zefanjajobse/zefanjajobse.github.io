@@ -19,7 +19,7 @@ nav a {
 }
 
 html {
-  /*background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;*/
+  background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
   background-size: cover;
 }
 
@@ -35,6 +35,7 @@ section {
     padding: 1rem 2rem;
     margin: 2rem;
     font-family: 'Roboto Mono', monospace;
+    backdrop-filter: blur(10px);
 }
 
 section p {
@@ -86,12 +87,20 @@ section .button:hover {
     background-color: #404040;
 }
 
-section a {
+section .list a {
     text-decoration: none;
     color: white;
 }
 
-section a:hover {
+section .list a:hover {
     text-decoration: none;
     color: white;
+}
+
+td {
+    padding: 0 1rem;
+}
+
+img {
+    padding-right: 1rem;
 }
