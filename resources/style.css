@@ -1,11 +1,92 @@
 nav {
-    padding: 1rem 0rem 1.5rem 0rem;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 0.5rem 0rem 0.5rem 0rem;
     display: flex;
     width: 100%;
-    justify-content: space-between;
-    border-bottom-style: solid;
+    justify-content: space-around;
+    background: white;
+    box-shadow: 0px 0px 1rem 1rem white;
 }
 
-nav div {
+nav a {
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;    
+    color: black;
+}
+
+html {
+  /*background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;*/
+  background-size: cover;
+}
+
+main {
+    position: absolute;
+    top: 4rem;
+}
+
+section {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: .5rem;
+    color: white;
+    padding: 1rem 2rem;
+    margin: 2rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+section p {
     
+    max-width: 40rem;
+}
+
+section li p {
+    margin-left: 1rem;
+}
+
+section .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+section .list .heading {
+    padding: 1rem;
+}
+
+section .list .item {
+    padding: 1rem;
+
+}
+
+section .redo {
+    background-color: yellow;
+}
+
+section .complete {
+    background-color: green;
+}
+
+section .button {
+    padding: 1rem;
+    background-color: gray;
+    margin: .5rem;
+    border-radius: .2em;
+    max-width: 20rem;
+}
+
+section .button:hover {
+    background-color: #404040;
+}
+
+section a {
+    text-decoration: none;
+    color: white;
+}
+
+section a:hover {
+    text-decoration: none;
+    color: white;
 }
