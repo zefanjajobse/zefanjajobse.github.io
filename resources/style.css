@@ -1,4 +1,36 @@
-nav {
+html {
+  background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
+  background-size: cover;
+}
+
+main { /*Alles onder de navbar*/
+    position: absolute;
+    top: 4rem;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+td {
+    padding: 0 1rem;
+}
+
+img {
+    padding-right: 1rem;
+}
+
+hr {
+    border-top: 1px solid #505050;
+}
+
+nav { /*navbar*/
     position: absolute;
     top: 0px;
     left: 0px;
@@ -18,17 +50,7 @@ nav a {
     color: black;
 }
 
-html {
-  background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
-  background-size: cover;
-}
-
-main {
-    position: absolute;
-    top: 4rem;
-}
-
-section {
+section { /*doorzichtig tekstvak*/
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: .5rem;
     color: white;
@@ -43,28 +65,35 @@ section p {
     max-width: 40rem;
 }
 
+section p a:hover {
+    animation-name: color;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    color: green;
+}
+
 section li p {
     margin-left: 1rem;
 }
 
-section .list {
+section .list { /*lijst met items van links naar rechts*/
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;
 }
 
-section .list .heading {
+section .list .list_heading {
     padding: 1rem;
 }
 
-section .list .item {
+section .list .list_item {
     padding: .5rem;
     margin: 0 .5rem;
     background-color: gray;
     border-radius: .1rem;
 }
 
-section .list .redo {
+section .list .redo { /*kleuren voor wat af is*/
     background-color: red;
 }
 
@@ -74,18 +103,6 @@ section .list .completed {
 
 section .list .started {
     background-color: teal;
-}
-
-section .button {
-    padding: 1rem;
-    background-color: gray;
-    margin: .5rem;
-    border-radius: .2em;
-    max-width: 20rem;
-}
-
-section .button:hover {
-    background-color: #404040;
 }
 
 section .list a {
@@ -98,14 +115,27 @@ section .list a:hover {
     color: white;
 }
 
-td {
-    padding: 0 1rem;
+section .button { /*grijze knoppen*/
+    padding: 1rem;
+    background-color: gray;
+    margin: .5rem;
+    border-radius: .2em;
+    max-width: 20rem;
 }
 
-img {
-    padding-right: 1rem;
+section .button:hover {
+    background-color: #404040;
+    animation-name: backgroundbutton;
+    animation-duration: .2s;
+    animation-iteration-count: 1;
 }
 
-hr {
-    border-top: 1px solid #505050;
+@keyframes backgroundbutton { /*effect gekoppeld aan knop*/
+    from {background-color: gray;}
+    to {background-color: #404040;}
+}
+
+@keyframes color { /*"a" kleur*/
+    from {color: #007bff;}
+    to {color: green;}
 }
