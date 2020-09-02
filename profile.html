@@ -15,6 +15,20 @@
         <a href="./dashboard.html">Dashboard</a>
         <a href="./faq.html">Frequently Asked Questions</a>
     </nav>
+    <div id="hamburger">
+        <p><a href="./index.html">Home</a></p>
+        <p><a href="#">Profiel</a></p>
+        <p><a href="./dashboard.html">Dashboard</a></p>
+        <p><a href="./faq.html">Frequently Asked Questions</a></p>
+    </div>
+    <div id="mobile-nav" onclick="hamburgerMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div id="mobile-close" onclick="hamburgerClose()">
+        X
+    </div>
     <main>
         <section>
             <div class="list">
@@ -79,5 +93,6 @@
                 </table>
         </section>
     </main>
+<script src="./resources/hamburger-menu.js"></script>
 </body>
 </html>

@@ -15,6 +15,20 @@
         <a href="#">Dashboard</a>
         <a href="./faq.html">Frequently Asked Questions</a>
     </nav>
+    <div id="hamburger">
+        <p><a href="./index.html">Home</a></p>
+        <p><a href="./profile.html">Profiel</a></p>
+        <p><a href="#">Dashboard</a></p>
+        <p><a href="./faq.html">Frequently Asked Questions</a></p>
+    </div>
+    <div id="mobile-nav" onclick="hamburgerMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div id="mobile-close" onclick="hamburgerClose()">
+        X
+    </div>
     <main>
         <section>
           <h2>Study Monitor</h2>
@@ -130,5 +144,6 @@
             </div>
         </section>
     </main>
+<script src="./resources/hamburger-menu.js"></script>
 </body>
 </html>

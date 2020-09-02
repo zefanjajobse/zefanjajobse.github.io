@@ -50,6 +50,60 @@ nav a {
     color: black;
 }
 
+#mobile-nav { /* hamburger knop */
+    visibility: hidden;
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+}
+
+.bar { /* 1 bar van mobile-nav */
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+}
+
+#mobile-close { /* kruisje mobiel */
+    visibility: hidden;
+    position: fixed;
+    top: .6rem;
+    right: 2rem;
+    font-size: 3.5em;
+    font-family: 'Nunito', sans-serif;
+    font-stretch: ultra-expanded;
+    z-index: 1;
+}
+
+#hamburger { /* navigatiebalk mobiel */
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    z-index: 1;
+    text-align: center;
+}
+
+#hamburger a {
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;    
+    color: black;
+}
+
+@media screen and (max-width: 600px) {
+    nav {
+        visibility: hidden;
+    }
+    #mobile-nav {
+        visibility: visible;
+    }
+}
+
 section { /*doorzichtig tekstvak*/
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: .5rem;
@@ -88,7 +142,7 @@ section .list .list_heading {
 
 section .list .list_item {
     padding: .5rem;
-    margin: 0 .5rem;
+    margin: .1rem .5rem;
     background-color: gray;
     border-radius: .1rem;
 }
