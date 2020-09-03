@@ -1,6 +1,7 @@
 html {
-  background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
-  background-size: cover;
+    background-color: black;
+    background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
+    background-size: cover;
 }
 
 main { /*Alles onder de navbar*/
