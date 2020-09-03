@@ -179,7 +179,7 @@ section .button { /*grijze knoppen*/
 }
 
 section .button:hover {
-    background-color: #404040;
+    background-color: #202020;
     animation-name: backgroundbutton;
     animation-duration: .2s;
     animation-iteration-count: 1;
@@ -195,8 +195,8 @@ section .button .icon img {
 }
 
 @keyframes backgroundbutton { /*effect gekoppeld aan knop*/
-    from {background-color: gray;}
-    to {background-color: #404040;}
+    from {background-color: #404040;}
+    to {background-color: #202020;}
 }
 
 @keyframes color { /*"a" kleur*/
