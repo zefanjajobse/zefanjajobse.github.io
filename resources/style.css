@@ -8,6 +8,12 @@ main { /*Alles onder de navbar*/
     top: 4rem;
 }
 
+@media screen and (min-width: 2300px) {
+   main {
+       display: flex;
+   }
+}
+
 a {
     text-decoration: none;
     color: #007bff;
