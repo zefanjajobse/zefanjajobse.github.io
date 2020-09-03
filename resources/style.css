@@ -143,7 +143,7 @@ section .list .list_heading {
 section .list .list_item {
     padding: .5rem;
     margin: .1rem .5rem;
-    background-color: gray;
+    background-color: #505050;
     border-radius: .1rem;
 }
 
@@ -171,10 +171,11 @@ section .list a:hover {
 
 section .button { /*grijze knoppen*/
     padding: 1rem;
-    background-color: gray;
+    background-color: #404040;
     margin: .5rem;
     border-radius: .2em;
-    max-width: 20rem;
+    max-width: 22rem;
+    display: block;
 }
 
 section .button:hover {
@@ -182,6 +183,15 @@ section .button:hover {
     animation-name: backgroundbutton;
     animation-duration: .2s;
     animation-iteration-count: 1;
+}
+
+section .button .icon {
+    float: left;
+}
+
+section .button .icon img {
+    width: 3rem;
+    margin-top: -.3rem;
 }
 
 @keyframes backgroundbutton { /*effect gekoppeld aan knop*/
