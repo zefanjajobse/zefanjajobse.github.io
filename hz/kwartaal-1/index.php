@@ -33,6 +33,41 @@
       </label>
 </form> 
 
+<style>
+.penguin {
+  --penguin-skin: gray;
+}
 
+.penguin-left-hand { /*om een variable aan meerdere items met dezelfde kleur toe te wijzen*/
+  background-color: gray; /* voor backwards compatibilty */
+  background-color: var(--penguin-skin);
+}
 
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px; /* makes 3 divs in the container 100px big */
+  grid-template-rows: 50px 50px;
+  grid-column-gap: 5px; /* room between columns */
+  grid-row-gap: 5px; /* room between rows */
+  grid-gap: 10px 20px; /* row - column */
+  grid-column: 2 / 4; /* select the space it uses in the grid on a item */
+  justify-self: center; /* align item horizontaal */
+  align-self: end; /* verticaal */
+  grid-template-areas: /* maak de grid makkerlijker (de header is 3 blokken lang) */
+  "header header header"
+  "advert content content"
+  "footer footer footer";
+  grid-area: footer; /* in een area, define het als de footer area */
+  grid-area: 3/1/4/4; /* grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at; */
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* autofills with columns until it doesnt fit within the minmax */
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* only do it when all the items doesnt fit */
 
+  /* instead of 1fr 1fr 1fr u can use repeat(3, 1fr); */
+
+  /* fr: sets the column or row to a fraction of the available space,
+
+auto: sets the column or row to the width or height of its content automatically,
+
+%: adjusts the column or row to the percent width of its container. */
+}
+</style>
