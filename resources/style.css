@@ -10,9 +10,9 @@ main { /*Alles onder de navbar*/
 }
 
 @media screen and (min-width: 2300px) {
-   main {
-       display: flex;
-   }
+    main {
+        display: flex;
+    }
 }
 
 a {
