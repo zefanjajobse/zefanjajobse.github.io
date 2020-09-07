@@ -166,7 +166,7 @@ section .list .list_item_color {
 }
 
 section .list .redo { /*kleuren voor wat af is*/
-    background-color: red;
+    background-color: red !important;
 }
 
 section .list .completed {
@@ -175,6 +175,10 @@ section .list .completed {
 
 section .list .started {
     background-color: teal;
+}
+
+section .list .started_important {
+    background-color: teal !important;
 }
 
 section .list a {
