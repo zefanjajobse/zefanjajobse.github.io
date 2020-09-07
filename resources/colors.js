@@ -1,4 +1,4 @@
-let listItems = Array.from(document.querySelectorAll(".list_item"));
+const listItems = Array.from(document.querySelectorAll(".list_item"));
 listItems.forEach(element => {
     let paragraphs = element.querySelectorAll("p");
     let result = paragraphs[1].textContent.substring(9,99).split(/,/);
