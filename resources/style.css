@@ -1,5 +1,21 @@
+:root {
+    --color-if-no-background: black;
+    --link-color: #007bff;
+    --link-color-nav: black;
+    --link-hover-color-p-section: green;
+    --nav-background: white;
+    --main-text-color: white;
+    --button-color: #404040;
+    --hover-button-color: #202020;
+    /*dashboard colors*/
+    --not-yet-started: #505050;
+    --started: teal;
+    --complete: green;
+    --redo: red;
+  }
+
 html {
-    background-color: black;
+    background-color: var(--color-if-no-background);
     background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
     background-size: cover;
 }
@@ -17,7 +33,7 @@ main { /*Alles onder de navbar*/
 
 a {
     text-decoration: none;
-    color: #007bff;
+    color: var(--link-color);
 }
 
 p,li,td {
@@ -25,7 +41,7 @@ p,li,td {
 }
 
 a:hover {
-    color: #007bff;
+    color: var(--link-color);
     text-decoration: underline;
 }
 
@@ -49,8 +65,8 @@ nav { /*navbar*/
     display: flex;
     width: 100%;
     justify-content: space-around;
-    background: white;
-    box-shadow: 0px 0px 1rem 1rem white;
+    background: var(--nav-background);
+    box-shadow: 0px 0px 1rem 1rem var(--nav-background);
 }
 
 nav a {
@@ -58,7 +74,7 @@ nav a {
     font-family: 'Nunito', sans-serif;
     font-size: 1.2em;
     font-weight: bold;    
-    color: black;
+    color: var(--link-color-nav);
 }
 
 #mobile-nav { /* hamburger knop */
@@ -93,7 +109,7 @@ nav a {
     top: 0;
     width: 100%;
     padding: 1rem;
-    background-color: white;
+    background-color: var(--nav-background);
     z-index: 1;
     text-align: center;
 }
@@ -103,7 +119,7 @@ nav a {
     font-family: 'Nunito', sans-serif;
     font-size: 1.3em;
     font-weight: bold;    
-    color: black;
+    color: var(--link-color-nav);
 }
 
 @media screen and (max-width: 600px) {
@@ -118,7 +134,7 @@ nav a {
 section { /*doorzichtig tekstvak*/
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: .5rem;
-    color: white;
+    color: var(--main-text-color);
     padding: 1rem 2rem;
     margin: 2rem;
     font-family: 'Roboto Mono', monospace;
@@ -134,7 +150,7 @@ section p a:hover {
     animation-name: color;
     animation-duration: 2s;
     animation-iteration-count: 1;
-    color: green;
+    color: var(--link-hover-color-p-section);;
 }
 
 section li p {
@@ -154,46 +170,46 @@ section .list .list_heading {
 section .list .list_item {
     padding: .5rem;
     margin: .1rem .5rem;
-    background-color: #505050;
+    background-color: var(--not-yet-started);
     border-radius: .1rem;
 }
 
 section .list .list_item_color {
     padding: .5rem;
     margin: .1rem .5rem;
-    background-color: #505050;
+    background-color: var(--not-yet-started);
     border-radius: .1rem;
 }
 
 section .list .redo { /*kleuren voor wat af is*/
-    background-color: red !important;
+    background-color: var(--redo) !important;
 }
 
 section .list .completed {
-    background-color: green;
+    background-color: var(--complete);
 }
 
 section .list .started {
-    background-color: teal;
+    background-color: var(--started);
 }
 
 section .list .started_important {
-    background-color: teal !important;
+    background-color: var(--started) !important;
 }
 
 section .list a {
     text-decoration: none;
-    color: white;
+    color: var(--main-text-color);
 }
 
 section .list a:hover {
     text-decoration: none;
-    color: white;
+    color: var(--main-text-color);
 }
 
 section .button { /*grijze knoppen*/
     padding: 1rem;
-    background-color: #404040;
+    background-color: var(--button-color);
     margin: .5rem;
     border-radius: .2em;
     max-width: 22rem;
@@ -201,7 +217,7 @@ section .button { /*grijze knoppen*/
 }
 
 section .button:hover {
-    background-color: #202020;
+    background-color: var(--hover-button-color);
     animation-name: backgroundbutton;
     animation-duration: .2s;
     animation-iteration-count: 1;
@@ -217,11 +233,11 @@ section .button .icon img {
 }
 
 @keyframes backgroundbutton { /*effect gekoppeld aan knop*/
-    from {background-color: #404040;}
-    to {background-color: #202020;}
+    from {background-color: var(--button-color);}
+    to {background-color: var(--hover-button-color);}
 }
 
 @keyframes color { /*"a" kleur*/
-    from {color: #007bff;}
-    to {color: green;}
+    from {color: var(--link-color);}
+    to {color: var(--link-hover-color-p-section);}
 }
