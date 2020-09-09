@@ -12,7 +12,7 @@
     --started: teal;
     --complete: green;
     --redo: red;
-  }
+}
 
 html {
     background-color: var(--color-if-no-background);
