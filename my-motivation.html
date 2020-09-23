@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./resources/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Roboto+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="./index.html">Home</a>
+        <a href="./profile.html">Profiel</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./faq.html">Frequently Asked Questions</a>
+        <a href="#">Mijn motivatie</a>
+    </nav>
+    <div id="hamburger">
+        <p><a href="./index.html">Home</a></p>
+        <p><a href="./profile.html">Profiel</a></p>
+        <p><a href="./dashboard.html">Dashboard</a></p>
+        <p><a href="./faq.html">Frequently Asked Questions</a></p>
+        <p><a href="#">Mijn motivatie</a></p>
+    </div>
+    <div id="mobile-nav" onclick="hamburgerMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div id="mobile-close" onclick="hamburgerClose()">
+        X
+    </div>
+    <main>
+        <section>
+            <h1>Theorie</h1>
+            <p></p>
+        </section>
+        <section>
+            <h1>Bronnenlijst</h1>
+            <ul>
+                <li>Feedback motivatie/website. <a href="./resources/pdf/Feedback en GitHub repository.pdf">Feedback en GitHub repository.pdf</a></li>
+            </ul>
+        </section>
+    </main>
+<script src="./resources/hamburger-menu.js"></script>
+</body>
+</html>
