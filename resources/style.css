@@ -1,5 +1,5 @@
 :root {
-    --color-if-no-background: black;
+    --color-if-no-background: grey;
     --link-color: #007bff;
     --link-color-nav: black;
     --link-hover-color-p-section: green;
@@ -18,6 +18,11 @@ html {
     background-color: var(--color-if-no-background);
     background: url(images/DSC_0069\ \(1\).jpg) no-repeat center fixed;
     background-size: cover;
+}
+
+html.motivation {
+    background: url(#) no-repeat center fixed;
+    background-color: var(--color-if-no-background);
 }
 
 main { /*Alles onder de navbar*/
@@ -144,6 +149,11 @@ section { /*doorzichtig tekstvak*/
 section p {
     margin-right: 1rem;
     max-width: 40rem;
+}
+
+section p.motivation {
+    max-width: 90rem;
+    margin-right: 0rem;
 }
 
 section p a:hover {
