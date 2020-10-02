@@ -20,7 +20,7 @@ html {
     background-size: cover;
 }
 
-html.motivation {
+html.grey {
     background: url(#) no-repeat center fixed;
     background-color: var(--color-if-no-background);
 }
@@ -151,7 +151,7 @@ section p {
     max-width: 40rem;
 }
 
-section p.motivation {
+section p.wide {
     max-width: 90rem;
     margin-right: 0rem;
 }
