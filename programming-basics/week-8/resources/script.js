@@ -206,3 +206,18 @@ function createCalendar(elem, year, month) {
 }
 
 createCalendar(cal, 2012, 9);
+
+// 
+
+// add a event that listens for a click
+cal.addEventListener('click', function(event) {
+    // take the event and prevent the default
+    event.preventDefault();
+    // do something with the item
+    console.log(this);
+})
+
+// get selected item from dropdown:
+/**
+ * let result = e.options[e.selectedIndex].value;
+ */
