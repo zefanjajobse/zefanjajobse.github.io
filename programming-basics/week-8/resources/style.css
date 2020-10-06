@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+.ulBackground {
+  background-color: aquamarine;
+}
+
+.liStandOut {
+  font-size: 3em;
+}
+
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 3px;
+  text-align: center;
+}
+
+th {
+  font-weight: bold;
+  background-color: #E6E6E6;
+}
