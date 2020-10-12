@@ -177,7 +177,7 @@ function createCalendar(elem, year, month) {
     // firstline
     let row = document.createElement("tr");
     // for loop empty days beginning month
-    for (let i = 0; i < new Date(`${year}-${month}-1`).getDay()-1; i++) {
+    for (let i = 0; i < new Date(`${year}-${month}-1`).getDay() - 1; i++) {
         weekday += 1;
         const day = document.createElement("td");
         row.appendChild(day)
@@ -210,7 +210,7 @@ createCalendar(cal, 2012, 9);
 // 
 
 // add a event that listens for a click
-cal.addEventListener('click', function(event) {
+cal.addEventListener('click', function (event) {
     // take the event and prevent the default
     event.preventDefault();
     // do something with the item
