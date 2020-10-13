@@ -29,12 +29,12 @@ main { /*Alles onder de navbar*/
     position: absolute;
     top: 4rem;
 }
-
+/* 
 @media screen and (min-width: 2300px) {
     main {
         display: flex;
     }
-}
+} */
 
 a {
     text-decoration: none;
