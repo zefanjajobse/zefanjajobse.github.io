@@ -146,6 +146,11 @@ section { /*doorzichtig tekstvak*/
     backdrop-filter: blur(10px);
 }
 
+section .icon img {
+    width: 3rem;
+    margin-top: .9rem;
+}
+
 section p {
     margin-right: 1rem;
     max-width: 40rem;
