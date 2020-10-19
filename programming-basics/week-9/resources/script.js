@@ -125,3 +125,10 @@ form.querySelector("#submit").addEventListener("click", function(event){
     event.preventDefault();
     chosenDate.textContent = date.value;
 })
+
+const onload = document.addEventListener('load', newfunction);
+
+function newfunction(event) {
+    console.log("runs on load")
+}
+
