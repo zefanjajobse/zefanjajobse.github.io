@@ -132,3 +132,8 @@ function newfunction(event) {
     console.log("runs on load")
 }
 
+const h1 = document.createElement('h1');
+h1.id = "test";
+h1.classList.add("test");
+h1.textContent = "test";
+
