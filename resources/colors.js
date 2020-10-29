@@ -5,7 +5,7 @@ listItems.forEach(element => {
     result.forEach(e => {
         if (e == "nog te doen") {
         
-        } else if (e = "-") {
+        } else if (e == "-") {
             element.classList.add("started_important")
         } else if (e == "gestart") {
             element.classList.add("started")
