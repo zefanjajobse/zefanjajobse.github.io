@@ -95,7 +95,6 @@ class Rectangle {
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.width, this.height);
         if (this.fill) {
-            console.log(this.fillStyle);
             ctx.fillStyle = this.fillStyle;
             ctx.fill();
         } else {
