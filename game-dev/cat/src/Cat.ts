@@ -41,6 +41,6 @@ class Cat {
     }
 
     private updateDom() {
-        this.output.textContent = `Mood:${this.mood} Hungry:${this.hungry} Energy:${this.energy}`
+        this.output.textContent = `Mood: ${this.mood} Hungry: ${this.hungry} Energy: ${this.energy}`
     }
 }

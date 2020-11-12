@@ -66,8 +66,12 @@ class NumberDisplay {
     /**
      * Increment the display value by one, rolling over to zero if the
      * limit is reached.
+     * @param callBack callback to the parent item to request to update the next item when value rolls over
      */
-    public increment() {
+    public increment(callBack: ClockDisplay) {
         this.value = (this.value + 1) % this.limit;
+        if (this.value === 0) {
+            return callBack.updateNext(this)
+        }
     }
 }

@@ -37,13 +37,7 @@ class ClockDisplay {
      * the clock display go one minute forward.
      */
     public timeTick() {
-        this.seconds.increment();
-        if(this.seconds.getValue() == 0) {
-            this.minutes.increment();
-            if(this.minutes.getValue() == 0) {
-                this.hours.increment();
-            }
-        }
+        this.seconds.increment(this);
         this.updateDisplay();
     }
 
@@ -67,6 +61,23 @@ class ClockDisplay {
 
         // Update the display
         this.updateDisplay();
+    }
+
+    /**
+     * increment the next item when the previous one rolls over
+     * @param timeItem previous numberdisplay item that calls the change, we use it to get the name of the second item
+     */
+    public updateNext(timeItem: NumberDisplay) {
+        switch (timeItem.constructor.name) {
+            case "seconds":
+                this.minutes.increment(this);
+                break;
+            case "minutes":
+                this.hours.increment(this);
+                break;
+            default:
+                break;
+        }
     }
 
     /**

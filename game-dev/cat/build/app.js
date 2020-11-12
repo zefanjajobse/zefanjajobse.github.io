@@ -43,7 +43,7 @@ class Cat {
         console.log("Meow");
     }
     updateDom() {
-        this.output.textContent = `Mood:${this.mood} Hungry:${this.hungry} Energy:${this.energy}`;
+        this.output.textContent = `Mood: ${this.mood} Hungry: ${this.hungry} Energy: ${this.energy}`;
     }
 }
 class ClockDisplay {
@@ -55,13 +55,7 @@ class ClockDisplay {
         this.updateDisplay();
     }
     timeTick() {
-        this.seconds.increment();
-        if (this.seconds.getValue() == 0) {
-            this.minutes.increment();
-            if (this.minutes.getValue() == 0) {
-                this.hours.increment();
-            }
-        }
+        this.seconds.increment(this);
         this.updateDisplay();
     }
     setTime(hours, minutes, seconds) {
@@ -71,6 +65,18 @@ class ClockDisplay {
             this.seconds.setStringValue(seconds);
         }
         this.updateDisplay();
+    }
+    updateNext(timeItem) {
+        switch (timeItem.constructor.name) {
+            case "seconds":
+                this.minutes.increment(this);
+                break;
+            case "minutes":
+                this.hours.increment(this);
+                break;
+            default:
+                break;
+        }
     }
     updateDisplay() {
         const displayString = `${this.hours.getStringValue()}:${this.minutes.getStringValue()}:${this.seconds.getStringValue()}`;
@@ -101,8 +107,11 @@ class NumberDisplay {
     setStringValue(newValue) {
         this.setValue(Number(newValue));
     }
-    increment() {
+    increment(callBack) {
         this.value = (this.value + 1) % this.limit;
+        if (this.value === 0) {
+            return callBack.updateNext(this);
+        }
     }
 }
 class Ticker {
