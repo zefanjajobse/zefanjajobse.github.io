@@ -1,10 +1,10 @@
 /**
  * The ClockDisplay class implements a digital clock display for a
- * European-style 24 hour clock. The clock shows hours and minutes. The 
- * range of the clock is 00:00 (midnight) to 23:59 (one minute before 
+ * European-style 24 hour clock. The clock shows hours, minutes and seconds. 
+ * The range of the clock is 00:00:00 (midnight) to 23:59:59 (one second before 
  * midnight).
  * 
- * The clock display receives "ticks" (via the timeTick method) every minute
+ * The clock display receives "ticks" (via the timeTick method) every second
  * and reacts by incrementing the display. This is done in the usual clock
  * fashion: the hour increments when the minutes roll over to zero.
  * 
@@ -69,15 +69,11 @@ class ClockDisplay {
         this.updateDisplay();
     }
 
-    private dec2bin(dec: number){
-        return (dec >>> 0).toString(2);
-    }
-
     /**
      * Update the display element in the DOM.
      */
     private updateDisplay() {
-        const displayString = `${this.dec2bin(this.hours.getValue())}:${this.dec2bin(this.minutes.getValue())}:${this.dec2bin(this.seconds.getValue())}`;
+        const displayString = `${this.hours.getStringValue()}:${this.minutes.getStringValue()}:${this.seconds.getStringValue()}`;
         this.output.innerText = displayString;
     }
 
