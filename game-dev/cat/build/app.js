@@ -40,7 +40,7 @@ class Cat {
         this.meow();
     }
     meow() {
-        console.log("Meow");
+        console.log("Meow!");
     }
     updateDom() {
         this.output.textContent = `Mood: ${this.mood} Hungry: ${this.hungry} Energy: ${this.energy}`;
