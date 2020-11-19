@@ -11,6 +11,10 @@ class Game {
     public static readonly Gravity: number = 0.0098;
     // size of the playerball
     public static readonly PlayerBallSize: number = 50;
+    public static readonly playerBallOffsetY: number = 50
+    public static readonly playerBallSpeed: number = 1.5;
+
+    public static readonly playerBallColor: string = "red";
 
     // offset for the canvas size
     private static readonly RightWallOffset: number = 1;
@@ -66,5 +70,4 @@ class Game {
             requestAnimationFrame(this.step);
         }
     }
-
 }

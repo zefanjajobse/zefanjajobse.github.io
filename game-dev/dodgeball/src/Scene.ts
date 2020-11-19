@@ -1,8 +1,10 @@
 class Scene {
     // declare initial values
+    private mouse: MouseListener;
     private ctx: CanvasRenderingContext2D;
     private balls: Array<BouncingBall> = new Array();
-    private playerPositionX: number;
+    public playerBall: BouncingBall;
+    public playerHands: Player;
 
     /**
      * declare the scene
@@ -11,14 +13,27 @@ class Scene {
      */
     constructor(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
         this.ctx = ctx
+        this.mouse = new MouseListener()
+        this.playerHands = new Player()
 
         // create the balls
         for (let i = 0; i < Game.AmountOfBalls; i++) {
-            this.balls.push(new BouncingBall(canvas))
+            // random size/speed
+            const ballRadius: number = 25 + 25 * Math.random();
+            const ballSpeedX: number = -5 + 10 * Math.random();
+            const ballPositionX: number = ballRadius +  
+                (canvas.width - 2 * ballRadius)*Math.random();
+            const ballPositionY: number = canvas.height * 0.8 + canvas.height * 0.2 * Math.random();
+            const ballSpeedY: number = 0;
+            // blue color
+            const ballColor: string = "blue"
+            // Spawn a Ball
+            this.balls.push(new BouncingBall(ballRadius, ballPositionX, ballPositionY, ballSpeedX, ballSpeedY, canvas, ballColor))
         }
         
-        // Set the player at the center
-        this.playerPositionX = canvas.width / 2;
+        // create player ball in the middle of the screen as starting point
+        const playerBallPositionX = canvas.width / 2;
+        this.playerBall = new BouncingBall(Game.PlayerBallSize, playerBallPositionX, Game.playerBallOffsetY, Game.playerBallSpeed, Game.playerBallSpeed, canvas, Game.playerBallColor)
     }
 
     /**
@@ -26,12 +41,21 @@ class Scene {
      * @param elapsed elapsed time since previous frame
      */
     public updateScene(elapsed: number) {
-        // updates gamelogic and returns if gameover
-        const gameover = this.balls.reduce(
-            (previous_return, ball) =>
-                previous_return ||
-                ball.updatePhysics(elapsed, this.playerPositionX)
-        , false)
+        this.processInput()
+
+        let gameover: boolean = false
+        // updates gamelogic and returns if gameover and removes ball if player has cought them
+        this.balls.forEach((element, index) => {
+            const object = element.updatePhysics(elapsed, this.playerBall.ballPositionX, this.playerBall.ballPositionY)
+            // only check for next gameover when gameover is still false (needs to check the next ball)
+            if (!gameover) {
+                gameover = object.isGameover
+            }
+            // remove ball if cought
+            if (object.leftHand || object.rightHand) {
+                this.balls.splice(index, 1)
+            }
+        });
 
         // render the new ball positions
         this.balls.forEach(element => {
@@ -39,18 +63,18 @@ class Scene {
         });
 
         // render the player
-        this.renderPlayer(this.ctx);
+        this.playerBall.renderBall(this.ctx)
+        this.playerHands.renderHands(this.ctx, this.playerBall.ballPositionX, this.playerBall.ballPositionY)
+        
+        // return gameover if the player got hit
         return gameover
     }
 
     /**
-     * render the player
-     * @param ctx Canvas object to render to
+     * process the input for the game
      */
-    private renderPlayer(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.ellipse(this.playerPositionX, Game.PlayerBallSize, Game.PlayerBallSize, Game.PlayerBallSize, 0, 0, 2 * Math.PI);
-        ctx.fill();
+    public processInput() {
+        // Check mouse location
+        this.playerBall.ballPositionX = this.mouse.mouseLocation
     }
 }
