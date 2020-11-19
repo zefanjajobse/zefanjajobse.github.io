@@ -61,10 +61,12 @@ class BouncingBall {
         // Collision detection: check if the ball hits the walls and let it bounce
         this.wallCollisionDetection(this.canvas);
 
+        // check if the hands cought the ball, remove ball if caught
         const leftHandPositionX: number = playerPositionX - 50;
         const rightHandPositionX: number = playerPositionX + 50;
         const leftHand = this.handCollisionDetection(leftHandPositionX, playerPositionY)
         const rightHand = this.handCollisionDetection(rightHandPositionX, playerPositionY)
+
         //  if the ball collides with the player. It's game over then
         const gameover = this.playerCollisionDetection(playerPositionX, playerPositionY);
         // return all values

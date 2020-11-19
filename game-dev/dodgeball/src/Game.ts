@@ -20,7 +20,7 @@ class Game {
     private static readonly RightWallOffset: number = 1;
     private static readonly BottomWallOffset: number = 4;
 
-    public static AmountOfBalls: number = 2;
+    public static AmountOfStartingBalls: number = 2;
 
     public constructor(canvas: HTMLElement) {
         this.canvas = <HTMLCanvasElement>canvas;

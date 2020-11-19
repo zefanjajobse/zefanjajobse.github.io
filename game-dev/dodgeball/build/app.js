@@ -84,7 +84,7 @@ Game.playerBallSpeed = 1.5;
 Game.playerBallColor = "red";
 Game.RightWallOffset = 1;
 Game.BottomWallOffset = 4;
-Game.AmountOfBalls = 2;
+Game.AmountOfStartingBalls = 2;
 class KeyListener {
     constructor() {
         this.keyCodeStates = new Array();
@@ -187,9 +187,18 @@ class Scene {
     constructor(ctx, canvas) {
         this.balls = new Array();
         this.ctx = ctx;
+        this.canvas = canvas;
         this.mouse = new MouseListener();
         this.playerHands = new Player();
-        for (let i = 0; i < Game.AmountOfBalls; i++) {
+        this.playerScore = 0;
+        this.levelCounter = 1;
+        this.amountOfBalls = Game.AmountOfStartingBalls;
+        this.createBalls(canvas, this.amountOfBalls);
+        const playerBallPositionX = canvas.width / 2;
+        this.playerBall = new BouncingBall(Game.PlayerBallSize, playerBallPositionX, Game.playerBallOffsetY, Game.playerBallSpeed, Game.playerBallSpeed, canvas, Game.playerBallColor);
+    }
+    createBalls(canvas, amountOfBalls) {
+        for (let i = 0; i < amountOfBalls; i++) {
             const ballRadius = 25 + 25 * Math.random();
             const ballSpeedX = -5 + 10 * Math.random();
             const ballPositionX = ballRadius +
@@ -199,8 +208,6 @@ class Scene {
             const ballColor = "blue";
             this.balls.push(new BouncingBall(ballRadius, ballPositionX, ballPositionY, ballSpeedX, ballSpeedY, canvas, ballColor));
         }
-        const playerBallPositionX = canvas.width / 2;
-        this.playerBall = new BouncingBall(Game.PlayerBallSize, playerBallPositionX, Game.playerBallOffsetY, Game.playerBallSpeed, Game.playerBallSpeed, canvas, Game.playerBallColor);
     }
     updateScene(elapsed) {
         this.processInput();
@@ -212,14 +219,30 @@ class Scene {
             }
             if (object.leftHand || object.rightHand) {
                 this.balls.splice(index, 1);
+                this.playerScore += 200;
             }
+            this.playerScore += 0.03;
         });
+        if (this.balls.length == 0 && !gameover) {
+            this.amountOfBalls += 2;
+            this.levelCounter += 1;
+            this.createBalls(this.canvas, this.amountOfBalls);
+        }
+        this.showScore(this.ctx);
         this.balls.forEach(element => {
             element.renderBall(this.ctx);
         });
         this.playerBall.renderBall(this.ctx);
         this.playerHands.renderHands(this.ctx, this.playerBall.ballPositionX, this.playerBall.ballPositionY);
         return gameover;
+    }
+    showScore(ctx) {
+        ctx.save();
+        ctx.resetTransform();
+        ctx.font = "28px Georgia";
+        ctx.fillStyle = "fuchsia";
+        ctx.fillText(`Level: ${this.levelCounter} Score: ${this.playerScore.toFixed(0)}`, 10, 30);
+        ctx.restore();
     }
     processInput() {
         this.playerBall.ballPositionX = this.mouse.mouseLocation;
