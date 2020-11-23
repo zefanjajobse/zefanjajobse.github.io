@@ -73,77 +73,123 @@ KeyListener.KEY_W = 87;
 KeyListener.KEY_X = 88;
 KeyListener.KEY_Y = 89;
 KeyListener.KEY_Z = 90;
-console.log("Javascript is working!");
-window.addEventListener('load', () => {
-    console.log("Handling the Load event");
-    const game = new Game(document.getElementById('canvas'));
-});
+class Player {
+    constructor(canvasCenter, playerPosition) {
+        this.keyListener = new KeyListener();
+        this.image = this.loadNewImage("./assets/img/players/character_robot_walk0.png");
+        this.positionX = canvasCenter;
+        this.positionY = playerPosition;
+    }
+    move(leftLane, middleLane, rightLane) {
+        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== leftLane) {
+            this.positionX = leftLane;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_DOWN) && this.positionX !== middleLane) {
+            this.positionX = middleLane;
+        }
+        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== rightLane) {
+            this.positionX = rightLane;
+        }
+    }
+    draw(ctx) {
+        ctx.drawImage(this.image, this.positionX - this.image.width / 2, this.positionY);
+    }
+    collidesWithTrophy(trophy, canvasHeight) {
+        return this.positionX < trophy.positionX + trophy.image.width
+            && this.positionX + this.image.width > trophy.positionX
+            && canvasHeight - Game.playerYPosition < trophy.positionY + trophy.image.height
+            && canvasHeight - Game.playerYPosition + this.image.height > trophy.positionY;
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+}
+class Trophy {
+    constructor(canvasCenter, trophy) {
+        this._points = trophy.score;
+        this._image = this.loadNewImage(`assets/img/objects/${trophy.image}`);
+        this._positionX = canvasCenter;
+        this._positionY = Game.TrophyBeginHeight;
+        this.speed = Game.TrophySpeed;
+    }
+    get image() {
+        return this._image;
+    }
+    get positionX() {
+        return this._positionX;
+    }
+    get positionY() {
+        return this._positionY;
+    }
+    get points() {
+        return this._points;
+    }
+    canvasCollisionDetection(canvasHeight, leftLane, middleLane, rightLane) {
+        if (this._positionY + this._image.height > canvasHeight + this._image.height) {
+            this.createNew(leftLane, middleLane, rightLane);
+        }
+    }
+    move() {
+        this._positionY += this.speed;
+    }
+    createNew(leftLane, middleLane, rightLane) {
+        let random = this.randomInteger(1, 3);
+        if (random === 1) {
+            this._positionX = leftLane;
+        }
+        if (random === 2) {
+            this._positionX = middleLane;
+        }
+        if (random === 3) {
+            this._positionX = rightLane;
+        }
+        random = this.randomInteger(0, Game.trophyArray.length - 1);
+        this._points = Game.trophyArray[random].score;
+        this._image = this.loadNewImage(`assets/img/objects/${Game.trophyArray[random].image}`);
+        this._positionY = Game.TrophyBeginHeight;
+        this.speed = Game.TrophySpeed;
+    }
+    draw(ctx) {
+        ctx.drawImage(this._image, this._positionX - this._image.width / 2, this._positionY);
+    }
+    loadNewImage(source) {
+        const img = new Image();
+        img.src = source;
+        return img;
+    }
+    randomInteger(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    }
+}
 class Game {
     constructor(canvas) {
         this.step = () => {
             const leftLane = this.canvas.width / 4;
             const middleLane = this.canvas.width / 2;
             const rightLane = this.canvas.width / 4 * 3;
-            if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.playerPositionX !== leftLane) {
-                this.playerPositionX = leftLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_UP) && this.playerPositionX !== middleLane) {
-                this.playerPositionX = middleLane;
-            }
-            if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.playerPositionX !== rightLane) {
-                this.playerPositionX = rightLane;
-            }
-            this.trophyPositionY += this.trophySpeed;
-            if (this.playerPositionX < this.trophyPositionX + this.trophyImage.width
-                && this.playerPositionX + this.playerImage.width > this.trophyPositionX
-                && this.canvas.height - 150 < this.trophyPositionY + this.trophyImage.height
-                && this.canvas.height - 150 + this.playerImage.height > this.trophyPositionY) {
-                const random = this.randomInteger(1, 3);
-                if (random === 1) {
-                    this.trophyPositionX = leftLane;
-                }
-                if (random === 2) {
-                    this.trophyPositionX = middleLane;
-                }
-                if (random === 3) {
-                    this.trophyPositionX = rightLane;
-                }
-                this.trophyImage = this.loadNewImage("assets/img/objects/gold_trophy.png");
-                this.trophyPositionY = 60;
-                this.trophySpeed = 5;
-            }
-            if (this.trophyPositionY + this.trophyImage.height > this.canvas.height) {
-                const random = this.randomInteger(1, 3);
-                if (random === 1) {
-                    this.trophyPositionX = leftLane;
-                }
-                if (random === 2) {
-                    this.trophyPositionX = middleLane;
-                }
-                if (random === 3) {
-                    this.trophyPositionX = rightLane;
-                }
-                this.trophyImage = this.loadNewImage("assets/img/objects/gold_trophy.png");
-                this.trophyPositionY = 60;
-                this.trophySpeed = 5;
-            }
+            this.player.move(leftLane, middleLane, rightLane);
+            this.trophy.move();
+            this.trophy.canvasCollisionDetection(this.canvas.height, leftLane, middleLane, rightLane);
             const ctx = this.canvas.getContext('2d');
             ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.writeTextToCanvas(ctx, "UP arrow = middle | LEFT arrow = left | RIGHT arrow = right", this.canvas.width / 2, 40, 14);
-            ctx.drawImage(this.playerImage, this.playerPositionX - this.playerImage.width / 2, this.canvas.height - 150);
-            ctx.drawImage(this.trophyImage, this.trophyPositionX - this.trophyImage.width / 2, this.trophyPositionY);
+            this.writeTextToCanvas(ctx, "DOWN arrow = middle | LEFT arrow = left | RIGHT arrow = right", this.canvas.width / 2, 30, 14);
+            this.writeTextToCanvas(ctx, `Score: ${this.totalScore}`, this.canvas.width / 2, 60, 20);
+            this.player.draw(ctx);
+            if (this.player.collidesWithTrophy(this.trophy, this.canvas.height)) {
+                this.totalScore += this.trophy.points;
+                this.trophy.createNew(leftLane, middleLane, rightLane);
+            }
+            this.trophy.draw(ctx);
             requestAnimationFrame(this.step);
         };
         this.canvas = canvas;
         this.canvas.width = window.innerWidth / 3;
         this.canvas.height = window.innerHeight;
-        this.keyListener = new KeyListener();
-        this.trophyImage = this.loadNewImage("assets/img/objects/gold_trophy.png");
-        this.trophyPositionX = this.canvas.width / 2;
-        this.trophyPositionY = 60;
-        this.trophySpeed = 5;
-        this.playerImage = this.loadNewImage("./assets/img/players/character_robot_walk0.png");
-        this.playerPositionX = this.canvas.width / 2;
+        this.player = new Player(this.canvas.width / 2, this.canvas.height - Game.playerYPosition);
+        this.trophy = new Trophy(this.canvas.width / 2, Game.trophyArray[0]);
+        this.totalScore = 0;
         console.log('start animation');
         requestAnimationFrame(this.step);
     }
@@ -153,13 +199,19 @@ class Game {
         ctx.textAlign = alignment;
         ctx.fillText(text, xCoordinate, yCoordinate);
     }
-    randomInteger(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
-    }
-    loadNewImage(source) {
-        const img = new Image();
-        img.src = source;
-        return img;
-    }
 }
+Game.playerYPosition = 150;
+Game.TrophySpeed = 5;
+Game.TrophyBeginHeight = 60;
+Game.trophyArray = [
+    { name: "gold_trophy", score: 10, image: "gold_trophy.png" },
+    { name: "red_cross", score: -5, image: "face_on_cross.png" },
+    { name: "silver_trophy", score: 5, image: "silver_trophy.png" },
+    { name: "lightning_bolt", score: -10, image: "face_on_yellow_power_icon.png" }
+];
+console.log("Javascript is working!");
+window.addEventListener('load', () => {
+    console.log("Handling the Load event");
+    const game = new Game(document.getElementById('canvas'));
+});
 //# sourceMappingURL=app.js.map
