@@ -68,8 +68,9 @@ class Trophy {
         if (random === 3) {
             this._positionX = rightLane;
         }
-        random = this.randomInteger(0, Game.trophyArray.length-1);
 
+        // pick a random trophy and make the current trophy like that
+        random = this.randomInteger(0, Game.trophyArray.length-1);
         this._points = Game.trophyArray[random].score
         this._image = this.loadNewImage(`assets/img/objects/${Game.trophyArray[random].image}`);
         this._positionY = Game.TrophyBeginHeight;
