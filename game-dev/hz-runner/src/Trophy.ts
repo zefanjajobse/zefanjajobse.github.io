@@ -7,6 +7,7 @@ class Trophy {
     private speed: number;
     private _points: number;
 
+    // declare getters
     public get image() : HTMLImageElement {
         return this._image
     }
