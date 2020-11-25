@@ -3,21 +3,22 @@ class Player {
     // initial values
     private canvas: HTMLCanvasElement;
 
-    private leftLane: number;
-    private middleLane: number;
-    private rightLane: number;
-
     private keyListener: KeyListener;
+
+    private lanes: number[]
 
     private image: HTMLImageElement;
     private positionX: number;
 
-    public constructor(canvas: HTMLCanvasElement) {
+    /**
+     * create a player
+     * @param canvas HTML canvas element
+     * @param lanes the amount of lanes in this level (array is made in level)
+     */
+    public constructor(canvas: HTMLCanvasElement, lanes: number[]) {
         this.canvas = canvas;
 
-        this.leftLane = this.canvas.width / 4;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 4 * 3;
+        this.lanes = lanes
 
         this.keyListener = new KeyListener();
 
@@ -28,16 +29,14 @@ class Player {
     /**
      * check for keypresses
      */
-    public move(): void {
-        if (this.keyListener.isKeyDown(KeyListener.KEY_LEFT) && this.positionX !== this.leftLane) {
-            this.positionX = this.leftLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_DOWN) && this.positionX !== this.middleLane) {
-            this.positionX = this.middleLane;
-        }
-        if (this.keyListener.isKeyDown(KeyListener.KEY_RIGHT) && this.positionX !== this.rightLane) {
-            this.positionX = this.rightLane;
-        }
+    public move(lanes: number[]): void {
+        // 49 == KEY_1, 50 key 2 etc..
+        // lanes == lanepositions, index == lanes from left to right
+        lanes.forEach((element, index) => {
+            if (this.keyListener.isKeyDown(49+index) && this.positionX !== element) {
+                this.positionX = element;
+            }
+        });
     }
 
     /**

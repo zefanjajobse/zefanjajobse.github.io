@@ -2,9 +2,6 @@ abstract class ScoringObject {
     
     private canvas: HTMLCanvasElement;
 
-    private leftLane: number;
-    private middleLane: number;
-    private rightLane: number;
 // visable for inherited classes: protected
     // protected == all childs (for example gold trophy) can read the item
     protected image: HTMLImageElement;
@@ -14,29 +11,21 @@ abstract class ScoringObject {
 
     protected points: number;
 
-    public constructor(canvas: HTMLCanvasElement) {
+    /**
+     * create a element the player can catch
+     * @param canvas HTML canvas element
+     * @param lanes the amount of lanes in this level (array is made in level)
+     */
+    public constructor(canvas: HTMLCanvasElement, lanes: number[]) {
         this.canvas = canvas;
 
-        this.leftLane = this.canvas.width / 4;
-        this.middleLane = this.canvas.width / 2;
-        this.rightLane = this.canvas.width / 4 * 3;
+        // position of object spawn is a random lane
+        const random = this.randomInteger(0, lanes.length-1);
+        this.positionX = lanes[random]
 
-        const random = this.randomInteger(1, 3);
-        if (random === 1) {
-            this.positionX = this.leftLane;
-        }
-        if (random === 2) {
-            this.positionX = this.middleLane;
-        }
-        if (random === 3) {
-            this.positionX = this.rightLane;
-        }
-
-        //this.image = this.loadNewImage("assets/img/objects/gold_trophy.png");
+        // starting position + static speed
         this.positionY = 60;
         this.speed = 5;
-
-        //this.points = 10;
     }
 
     /**
