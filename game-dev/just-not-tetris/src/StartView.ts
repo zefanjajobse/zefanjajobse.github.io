@@ -15,6 +15,10 @@ class StartView extends View {
         super.init(game);
     }
 
+    /**
+     * if S is pressed, show the next screen
+     * @param input listen for keyboard presses
+     */
     public listen(input: Input) {
         super.listen(input);
 
@@ -30,6 +34,10 @@ class StartView extends View {
         }
     } 
 
+    /**
+     * draw the starting text to the screen
+     * @param ctx canvas 3d randering context
+     */
     public draw(ctx: CanvasRenderingContext2D) {
         this.writeTextToCanvas(ctx, "Just not Tetris", 140, this.center.x, 150, 'center', 'black');
 

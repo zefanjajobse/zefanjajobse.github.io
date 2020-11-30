@@ -96,7 +96,7 @@ GameItem.STATE_DYING = 8;
 GameItem.STATE_DEAD = 9;
 class Block extends GameItem {
     constructor(image, blockHeight, blockWidth) {
-        super(image, null, new Vector(0, -44), 0, 0);
+        super(image, null, new Vector(0, -Tetris.blockSize), 0, 0);
         this._blockHeight = blockHeight;
         this._blockWidth = blockWidth;
     }
@@ -108,17 +108,17 @@ class Block extends GameItem {
     }
     moveLeft() {
         const leftSidePlayingField = this.playingFieldPosition.x - this.playingFieldSize.x / 2;
-        const leftSideBlock = this.position.x - (this.blockWidth / 2) * 44;
-        if (leftSideBlock - 44 >= leftSidePlayingField) {
-            this._position = new Vector(this._position.x - 44, this._position.y);
+        const leftSideBlock = this.position.x - (this.blockWidth / 2) * Tetris.blockSize;
+        if (leftSideBlock - Tetris.blockSize >= leftSidePlayingField) {
+            this._position = new Vector(this._position.x - Tetris.blockSize, this._position.y);
         }
     }
     moveRight() {
         const rightSidePlayingField = this.playingFieldPosition.x + this.playingFieldSize.x / 2;
-        const rightSideBlock = this.position.x + (this.blockWidth / 2) * 44;
+        const rightSideBlock = this.position.x + (this.blockWidth / 2) * Tetris.blockSize;
         console.log(rightSidePlayingField, rightSideBlock);
-        if (rightSideBlock + 44 <= rightSidePlayingField) {
-            this._position = new Vector(this._position.x + 44, this._position.y);
+        if (rightSideBlock + Tetris.blockSize <= rightSidePlayingField) {
+            this._position = new Vector(this._position.x + Tetris.blockSize, this._position.y);
         }
     }
     updatePlayingField(playingFieldPosition, playingFieldSize) {
@@ -128,12 +128,12 @@ class Block extends GameItem {
     draw(ctx) {
         if (this.position === null) {
             const leftSide = this.playingFieldPosition.x - this.playingFieldSize.x / 2;
-            let initialXPosition = leftSide + 3 * 44;
+            let initialXPosition = leftSide + 3 * Tetris.blockSize;
             if (this.blockWidth % 2 !== 0) {
                 initialXPosition += 22;
             }
             const bottom = this.playingFieldPosition.y + this.playingFieldSize.y / 2;
-            let initialYPosition = bottom - 13 * 44;
+            let initialYPosition = bottom - 13 * Tetris.blockSize;
             if (this.blockHeight % 2 !== 0) {
                 initialYPosition += 22;
             }
@@ -226,7 +226,7 @@ class LevelView extends View {
     init(game) {
         super.init(game);
         this.background = game.repo.getImage("background");
-        this.playingField = new PlayingField(game);
+        this.playingField = new PlayingField(game, 5);
     }
     listen(input) {
         super.listen(input);
@@ -252,17 +252,26 @@ class LevelView extends View {
         this.playingField.draw(ctx, backgroundTopLeft.x, backgroundTopLeft.y);
     }
     move(canvas) {
-        super.move(canvas);
-        this.lastMoveDown = this.playingField.moveDown(canvas, this.lastMoveDown, this.game);
+        if (this.playingField.stillMoreBlocks()) {
+            super.move(canvas);
+            this.lastMoveDown = this.playingField.moveDown(canvas, this.lastMoveDown);
+        }
+        else {
+        }
     }
 }
 class PlayingField {
-    constructor(game) {
+    constructor(game, amountOfBlocks) {
         this.size = new Vector(308, 618);
         this.availableBlocks = ["I", "L", "R", "S", "T"];
+        this.leftOverBlocks = [];
         this.delay = 250;
         this.blocksInPlay = [];
-        this.createNewMovingBlock(game);
+        this.amountOfBlocks = amountOfBlocks;
+        for (let i = 0; i < this.amountOfBlocks; i++) {
+            this.leftOverBlocks.push(this.createNewMovingBlock(game));
+        }
+        this.movingBlock = this.leftOverBlocks.shift();
     }
     draw(ctx, backgroundTopLeftX, backgroundTopLeftY) {
         this.blocksInPlay.forEach(block => {
@@ -279,34 +288,32 @@ class PlayingField {
         const randomBlock = this.getRandomBlock();
         switch (randomBlock) {
             case "I":
-                this.movingBlock = new IBlock(game.repo.getImage(randomBlock));
-                break;
+                return new IBlock(game.repo.getImage(randomBlock));
             case "L":
-                this.movingBlock = new LBlock(game.repo.getImage(randomBlock));
-                break;
+                return new LBlock(game.repo.getImage(randomBlock));
             case "R":
-                this.movingBlock = new RBlock(game.repo.getImage(randomBlock));
-                break;
+                return new RBlock(game.repo.getImage(randomBlock));
             case "S":
-                this.movingBlock = new SBlock(game.repo.getImage(randomBlock));
-                break;
-            case "T":
-                this.movingBlock = new TBlock(game.repo.getImage(randomBlock));
-                break;
+                return new SBlock(game.repo.getImage(randomBlock));
+            default:
+                return new TBlock(game.repo.getImage(randomBlock));
         }
     }
-    moveDown(canvas, lastMoveDown, game) {
+    moveDown(canvas, lastMoveDown) {
         if (this.movingBlock.position !== null && performance.now() - lastMoveDown > this.delay) {
             lastMoveDown = performance.now();
             this.movingBlock.move(canvas);
             const bottomField = this.position.y + this.size.y / 2;
-            const bottomBlock = this.movingBlock.position.y + (this.movingBlock.blockHeight / 2) * 44;
+            const bottomBlock = this.movingBlock.position.y + (this.movingBlock.blockHeight / 2) * Tetris.blockSize;
             if (bottomField === bottomBlock) {
                 this.blocksInPlay.push(this.movingBlock);
-                this.createNewMovingBlock(game);
+                this.movingBlock = this.leftOverBlocks.shift();
             }
         }
         return lastMoveDown;
+    }
+    stillMoreBlocks() {
+        return !(this.leftOverBlocks.length == 0);
     }
     moveLeft() {
         this.movingBlock.moveLeft();
@@ -428,6 +435,7 @@ class Tetris extends Game {
         };
     }
 }
+Tetris.blockSize = 44;
 let game = null;
 window.addEventListener('load', function () {
     game = new Tetris(document.getElementById('canvas'));

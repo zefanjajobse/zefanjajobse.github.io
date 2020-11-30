@@ -1,7 +1,6 @@
 /// <reference path="framework/View.ts"/>
 
 class LevelView extends View {
-
     private playingField: PlayingField;
 
     private lastMoveDown: number = performance.now();
@@ -14,9 +13,13 @@ class LevelView extends View {
     public init(game: Game) {
         super.init(game);
         this.background = game.repo.getImage("background");
-        this.playingField = new PlayingField(game)
+        this.playingField = new PlayingField(game, 5)
     }
 
+    /**
+     * listen for input for left or right keypress
+     * @param input keyboard input
+     */
     public listen(input: Input) {
         super.listen(input);
 
@@ -33,6 +36,10 @@ class LevelView extends View {
         }
     }
 
+    /**
+     * draw the background image and ask to draw block
+     * @param ctx canvas rendering context
+     */
     public draw(ctx: CanvasRenderingContext2D) {
         this.background.width = this.backgroundSize.x;
         this.background.height = this.backgroundSize.y;
@@ -46,9 +53,17 @@ class LevelView extends View {
         this.playingField.draw(ctx, backgroundTopLeft.x, backgroundTopLeft.y);
     }
 
+    /**
+     * move the tetris block down by one blockheight
+     * @param canvas canvas html element
+     */
     public move(canvas: HTMLCanvasElement) {
-        super.move(canvas);
-        this.lastMoveDown = this.playingField.moveDown(canvas, this.lastMoveDown, this.game)
+        if (this.playingField.stillMoreBlocks()) {
+            super.move(canvas);
+            this.lastMoveDown = this.playingField.moveDown(canvas, this.lastMoveDown)
+        } else {
+            // for later
+        }
     }
 
 }

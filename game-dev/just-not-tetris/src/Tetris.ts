@@ -7,7 +7,7 @@
  * the game.
  */
 class Tetris extends Game {
-
+    public static readonly blockSize: number = 44;
     protected initResources(): any {
         //TODO add more resources as needed
         return new ResourceConfig(
