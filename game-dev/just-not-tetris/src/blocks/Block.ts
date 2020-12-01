@@ -1,4 +1,4 @@
-/// <reference path="framework/GameItem.ts"/>
+/// <reference path="../framework/GameItem.ts"/>
 
 abstract class Block extends GameItem {
 

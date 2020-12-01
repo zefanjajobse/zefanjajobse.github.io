@@ -1,157 +1,3 @@
-class GameItem {
-    constructor(image, position, speed, angle, angularSpeed, offscreenBehaviour = GameItem.OFFSCREEN_BEHAVIOUR_OVERFLOW) {
-        this._image = image;
-        this._position = position;
-        this._speed = speed;
-        this._angle = angle;
-        this._angularSpeed = angularSpeed;
-        this._offscreenBehaviour = offscreenBehaviour;
-    }
-    get collisionRadius() {
-        return this._image.height / 2;
-    }
-    get position() {
-        return this._position;
-    }
-    get speed() {
-        return this._speed;
-    }
-    move(canvas) {
-        this._position = new Vector(this._position.x + this._speed.x, this._position.y - this._speed.y);
-        switch (this._offscreenBehaviour) {
-            case GameItem.OFFSCREEN_BEHAVIOUR_OVERFLOW:
-                this.adjustOverflow(canvas.width, canvas.height);
-                break;
-            case GameItem.OFFSCREEN_BEHAVIOUR_BOUNCE:
-                break;
-            case GameItem.OFFSCREEN_BEHAVIOUR_DIE:
-                this.adjustDie(canvas.width, canvas.height);
-                break;
-        }
-        this._angle += this._angularSpeed;
-    }
-    adjustOverflow(maxX, maxY) {
-        if (this._position.x > maxX) {
-            this._position = new Vector(-this._image.width, this._position.y);
-        }
-        else if (this._position.x < -this._image.width) {
-            this._position = new Vector(maxX, this._position.y);
-        }
-        if (this._position.y > maxY + this._image.height / 2) {
-            this._position = new Vector(this._position.x, -this._image.height / 2);
-        }
-        else if (this._position.y < -this._image.height / 2) {
-            this._position = new Vector(this._position.x, maxY);
-        }
-    }
-    adjustDie(maxX, maxY) {
-        if (this._position.x + this._image.width > maxX || this._position.x < 0 ||
-            this._position.y + this._image.height / 2 > maxY ||
-            this._position.y - this._image.height / 2 < 0) {
-            this.die();
-        }
-    }
-    die() {
-        this._state = GameItem.STATE_DEAD;
-    }
-    isDead() {
-        return this._state == GameItem.STATE_DEAD;
-    }
-    draw(ctx) {
-        ctx.save();
-        ctx.translate(this._position.x, this._position.y);
-        ctx.rotate(this._angle);
-        ctx.drawImage(this._image, -this._image.width / 2, -this._image.height / 2);
-        ctx.restore();
-    }
-    drawDebug(ctx) {
-        ctx.save();
-        ctx.strokeStyle = '#ffffb3';
-        ctx.beginPath();
-        this.drawCenterInfo(ctx);
-        this.drawCollisionBounds(ctx);
-        ctx.stroke();
-        ctx.restore();
-    }
-    drawCenterInfo(ctx) {
-        ctx.moveTo(this._position.x - 50, this._position.y);
-        ctx.lineTo(this._position.x + 50, this._position.y);
-        ctx.moveTo(this._position.x, this._position.y - 50);
-        ctx.lineTo(this._position.x, this._position.y + 50);
-        const text = `(${this._position.x.toPrecision(3)},${this._position.y.toPrecision(3)})`;
-        ctx.font = `10px courier`;
-        ctx.textAlign = 'left';
-        ctx.fillText(text, this._position.x + 10, this._position.y - 10);
-    }
-    drawCollisionBounds(ctx) {
-        ctx.moveTo(this._position.x, this._position.y);
-        ctx.arc(this._position.x, this._position.y, this._image.width / 2, 0, 2 * Math.PI, false);
-    }
-}
-GameItem.OFFSCREEN_BEHAVIOUR_OVERFLOW = 0;
-GameItem.OFFSCREEN_BEHAVIOUR_BOUNCE = 2;
-GameItem.OFFSCREEN_BEHAVIOUR_DIE = 3;
-GameItem.STATE_ALIVE = 0;
-GameItem.STATE_DYING = 8;
-GameItem.STATE_DEAD = 9;
-class Block extends GameItem {
-    constructor(image, blockHeight, blockWidth) {
-        super(image, null, new Vector(0, -Tetris.blockSize), 0, 0);
-        this._blockHeight = blockHeight;
-        this._blockWidth = blockWidth;
-    }
-    get blockHeight() {
-        return this._blockHeight;
-    }
-    get blockWidth() {
-        return this._blockWidth;
-    }
-    moveLeft() {
-        const leftSidePlayingField = this.playingFieldPosition.x - this.playingFieldSize.x / 2;
-        const leftSideBlock = this.position.x - (this.blockWidth / 2) * Tetris.blockSize;
-        if (leftSideBlock - Tetris.blockSize >= leftSidePlayingField) {
-            this._position = new Vector(this._position.x - Tetris.blockSize, this._position.y);
-        }
-    }
-    moveRight() {
-        const rightSidePlayingField = this.playingFieldPosition.x + this.playingFieldSize.x / 2;
-        const rightSideBlock = this.position.x + (this.blockWidth / 2) * Tetris.blockSize;
-        console.log(rightSidePlayingField, rightSideBlock);
-        if (rightSideBlock + Tetris.blockSize <= rightSidePlayingField) {
-            this._position = new Vector(this._position.x + Tetris.blockSize, this._position.y);
-        }
-    }
-    updatePlayingField(playingFieldPosition, playingFieldSize) {
-        this.playingFieldPosition = playingFieldPosition;
-        this.playingFieldSize = playingFieldSize;
-    }
-    draw(ctx) {
-        if (this.position === null) {
-            const leftSide = this.playingFieldPosition.x - this.playingFieldSize.x / 2;
-            let initialXPosition = leftSide + 3 * Tetris.blockSize;
-            if (this.blockWidth % 2 !== 0) {
-                initialXPosition += 22;
-            }
-            const bottom = this.playingFieldPosition.y + this.playingFieldSize.y / 2;
-            let initialYPosition = bottom - 13 * Tetris.blockSize;
-            if (this.blockHeight % 2 !== 0) {
-                initialYPosition += 22;
-            }
-            this._position = new Vector(initialXPosition, initialYPosition);
-        }
-        super.draw(ctx);
-    }
-}
-class IBlock extends Block {
-    constructor(image) {
-        super(image, 4, 1);
-    }
-}
-class LBlock extends Block {
-    constructor(image) {
-        super(image, 3, 2);
-    }
-}
 class View {
     constructor() {
         this.center = new Vector();
@@ -322,16 +168,6 @@ class PlayingField {
         this.movingBlock.moveRight();
     }
 }
-class RBlock extends Block {
-    constructor(image) {
-        super(image, 2, 2);
-    }
-}
-class SBlock extends Block {
-    constructor(image) {
-        super(image, 2, 3);
-    }
-}
 class StartView extends View {
     constructor() {
         super(...arguments);
@@ -354,11 +190,6 @@ class StartView extends View {
     draw(ctx) {
         this.writeTextToCanvas(ctx, "Just not Tetris", 140, this.center.x, 150, 'center', 'black');
         this.writeTextToCanvas(ctx, "HIT 'S' TO START", 40, this.center.x, this.center.y - 135, 'center', 'black');
-    }
-}
-class TBlock extends Block {
-    constructor(image) {
-        super(image, 2, 3);
     }
 }
 class Game {
@@ -440,6 +271,175 @@ let game = null;
 window.addEventListener('load', function () {
     game = new Tetris(document.getElementById('canvas'));
 });
+class GameItem {
+    constructor(image, position, speed, angle, angularSpeed, offscreenBehaviour = GameItem.OFFSCREEN_BEHAVIOUR_OVERFLOW) {
+        this._image = image;
+        this._position = position;
+        this._speed = speed;
+        this._angle = angle;
+        this._angularSpeed = angularSpeed;
+        this._offscreenBehaviour = offscreenBehaviour;
+    }
+    get collisionRadius() {
+        return this._image.height / 2;
+    }
+    get position() {
+        return this._position;
+    }
+    get speed() {
+        return this._speed;
+    }
+    move(canvas) {
+        this._position = new Vector(this._position.x + this._speed.x, this._position.y - this._speed.y);
+        switch (this._offscreenBehaviour) {
+            case GameItem.OFFSCREEN_BEHAVIOUR_OVERFLOW:
+                this.adjustOverflow(canvas.width, canvas.height);
+                break;
+            case GameItem.OFFSCREEN_BEHAVIOUR_BOUNCE:
+                break;
+            case GameItem.OFFSCREEN_BEHAVIOUR_DIE:
+                this.adjustDie(canvas.width, canvas.height);
+                break;
+        }
+        this._angle += this._angularSpeed;
+    }
+    adjustOverflow(maxX, maxY) {
+        if (this._position.x > maxX) {
+            this._position = new Vector(-this._image.width, this._position.y);
+        }
+        else if (this._position.x < -this._image.width) {
+            this._position = new Vector(maxX, this._position.y);
+        }
+        if (this._position.y > maxY + this._image.height / 2) {
+            this._position = new Vector(this._position.x, -this._image.height / 2);
+        }
+        else if (this._position.y < -this._image.height / 2) {
+            this._position = new Vector(this._position.x, maxY);
+        }
+    }
+    adjustDie(maxX, maxY) {
+        if (this._position.x + this._image.width > maxX || this._position.x < 0 ||
+            this._position.y + this._image.height / 2 > maxY ||
+            this._position.y - this._image.height / 2 < 0) {
+            this.die();
+        }
+    }
+    die() {
+        this._state = GameItem.STATE_DEAD;
+    }
+    isDead() {
+        return this._state == GameItem.STATE_DEAD;
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this._position.x, this._position.y);
+        ctx.rotate(this._angle);
+        ctx.drawImage(this._image, -this._image.width / 2, -this._image.height / 2);
+        ctx.restore();
+    }
+    drawDebug(ctx) {
+        ctx.save();
+        ctx.strokeStyle = '#ffffb3';
+        ctx.beginPath();
+        this.drawCenterInfo(ctx);
+        this.drawCollisionBounds(ctx);
+        ctx.stroke();
+        ctx.restore();
+    }
+    drawCenterInfo(ctx) {
+        ctx.moveTo(this._position.x - 50, this._position.y);
+        ctx.lineTo(this._position.x + 50, this._position.y);
+        ctx.moveTo(this._position.x, this._position.y - 50);
+        ctx.lineTo(this._position.x, this._position.y + 50);
+        const text = `(${this._position.x.toPrecision(3)},${this._position.y.toPrecision(3)})`;
+        ctx.font = `10px courier`;
+        ctx.textAlign = 'left';
+        ctx.fillText(text, this._position.x + 10, this._position.y - 10);
+    }
+    drawCollisionBounds(ctx) {
+        ctx.moveTo(this._position.x, this._position.y);
+        ctx.arc(this._position.x, this._position.y, this._image.width / 2, 0, 2 * Math.PI, false);
+    }
+}
+GameItem.OFFSCREEN_BEHAVIOUR_OVERFLOW = 0;
+GameItem.OFFSCREEN_BEHAVIOUR_BOUNCE = 2;
+GameItem.OFFSCREEN_BEHAVIOUR_DIE = 3;
+GameItem.STATE_ALIVE = 0;
+GameItem.STATE_DYING = 8;
+GameItem.STATE_DEAD = 9;
+class Block extends GameItem {
+    constructor(image, blockHeight, blockWidth) {
+        super(image, null, new Vector(0, -Tetris.blockSize), 0, 0);
+        this._blockHeight = blockHeight;
+        this._blockWidth = blockWidth;
+    }
+    get blockHeight() {
+        return this._blockHeight;
+    }
+    get blockWidth() {
+        return this._blockWidth;
+    }
+    moveLeft() {
+        const leftSidePlayingField = this.playingFieldPosition.x - this.playingFieldSize.x / 2;
+        const leftSideBlock = this.position.x - (this.blockWidth / 2) * Tetris.blockSize;
+        if (leftSideBlock - Tetris.blockSize >= leftSidePlayingField) {
+            this._position = new Vector(this._position.x - Tetris.blockSize, this._position.y);
+        }
+    }
+    moveRight() {
+        const rightSidePlayingField = this.playingFieldPosition.x + this.playingFieldSize.x / 2;
+        const rightSideBlock = this.position.x + (this.blockWidth / 2) * Tetris.blockSize;
+        console.log(rightSidePlayingField, rightSideBlock);
+        if (rightSideBlock + Tetris.blockSize <= rightSidePlayingField) {
+            this._position = new Vector(this._position.x + Tetris.blockSize, this._position.y);
+        }
+    }
+    updatePlayingField(playingFieldPosition, playingFieldSize) {
+        this.playingFieldPosition = playingFieldPosition;
+        this.playingFieldSize = playingFieldSize;
+    }
+    draw(ctx) {
+        if (this.position === null) {
+            const leftSide = this.playingFieldPosition.x - this.playingFieldSize.x / 2;
+            let initialXPosition = leftSide + 3 * Tetris.blockSize;
+            if (this.blockWidth % 2 !== 0) {
+                initialXPosition += 22;
+            }
+            const bottom = this.playingFieldPosition.y + this.playingFieldSize.y / 2;
+            let initialYPosition = bottom - 13 * Tetris.blockSize;
+            if (this.blockHeight % 2 !== 0) {
+                initialYPosition += 22;
+            }
+            this._position = new Vector(initialXPosition, initialYPosition);
+        }
+        super.draw(ctx);
+    }
+}
+class IBlock extends Block {
+    constructor(image) {
+        super(image, 4, 1);
+    }
+}
+class LBlock extends Block {
+    constructor(image) {
+        super(image, 3, 2);
+    }
+}
+class RBlock extends Block {
+    constructor(image) {
+        super(image, 2, 2);
+    }
+}
+class SBlock extends Block {
+    constructor(image) {
+        super(image, 2, 3);
+    }
+}
+class TBlock extends Block {
+    constructor(image) {
+        super(image, 2, 3);
+    }
+}
 class LoadView extends View {
     constructor(nextView) {
         super();
