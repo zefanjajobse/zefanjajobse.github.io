@@ -1,7 +1,7 @@
 class Game {
     public static readonly minAmountOfKiwis: number = 3;
     public static readonly maxAmountOfKiwis: number = 10;
-
+    
     public static readonly minAmountOfTimeAliveFruit: number = 0;
     public static readonly maxAmountOfTimeAliveFruit: number = 350;
 

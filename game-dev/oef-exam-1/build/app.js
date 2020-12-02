@@ -48,7 +48,7 @@ class Apple extends Fruit {
         else if (this._yPos >= canvas.height - this._image.height) {
             this.yVelocity = -Math.abs(this.yVelocity);
         }
-        else if (this._xPos >= canvas.width - this._image.width) {
+        if (this._xPos >= canvas.width - this._image.width) {
             this.xVelocity = -Math.abs(this.xVelocity);
         }
         else if (this._xPos <= 0) {
