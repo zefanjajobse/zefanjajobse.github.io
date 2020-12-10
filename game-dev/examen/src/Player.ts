@@ -1,8 +1,19 @@
 /// <reference path="GameItem.ts"/>
+/**
+ * all items used to make the player a player
+ */
 class Player extends GameItem {
     private radius: number;
     private keyBoardListener: KeyboardListener;
 
+    /**
+     * makes the main player
+     * @param name name of the playerItem
+     * @param xPosition starting position X
+     * @param yPosition starting position Y
+     * @param speed Speed when pressing the arrows
+     * @param radius starting size
+     */
     constructor(name: string, xPosition: number, yPosition: number, speed: number, radius: number) {
         // send to main class
         super(name, xPosition, yPosition, speed)

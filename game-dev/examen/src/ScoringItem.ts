@@ -1,8 +1,20 @@
 /// <reference path="GameItem.ts"/>
+/**
+ * this item is the parent of both the rocket and the powerup
+ */
 abstract class ScoringItem extends GameItem {
     private _points: number;
     protected _image: HTMLImageElement;
 
+    /**
+     * declare the values used
+     * @param name name of the gameObject
+     * @param xPosition starting X position
+     * @param yPosition starting Y position
+     * @param speed startingspeed
+     * @param image image used for the gameObject
+     * @param points how much points its worth
+     */
     constructor(name: string, xPosition: number, yPosition: number, speed: number, image: HTMLImageElement, points: number) {
         // send to main class
         super(name, xPosition, yPosition, speed)

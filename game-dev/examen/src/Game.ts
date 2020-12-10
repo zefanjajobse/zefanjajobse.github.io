@@ -1,3 +1,6 @@
+/**
+ * main game class
+ */
 class Game {
     // game starting values
     public static readonly PlayerSpeed: number = 15;
@@ -21,6 +24,10 @@ class Game {
     private score: number;
     private ctx: CanvasRenderingContext2D;
 
+    /**
+     * creates the main game item
+     * @param canvasId canvas element that the game needs to use
+     */
     public constructor(canvasId: HTMLCanvasElement) {
         // Construct all of the canvas
         this.canvas = canvasId;
