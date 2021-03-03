@@ -1,0 +1,32 @@
+#https://sequencediagram.org/
+title Delete a Foo
+
+Browser->Laravel: DELETE('/articles/1')
+activate Laravel
+Laravel->ArticleController: destroy(1)
+activate ArticleController
+ArticleController->Class Article: find(1)
+activate Class Article
+Class Article->MySQL: SELECT * FROM articles WHERE if = 1
+activate MySQL
+MySQL-->Class Article: resultset
+deactivate MySQL
+
+Class Article->$article: create(resultset)
+Class Article-->ArticleController: $article
+deactivate Class Article
+
+ArticleController->Class Article: delete()
+activate Class Article
+Class Article->MySQL: DELETE FROM articles WHERE id = 1
+activate MySQL
+deactivate Class Article
+
+ArticleController-->Laravel: redirect('/articles')
+deactivate ArticleController
+deactivate MySQL
+activate Laravel
+
+Laravel-->Browser: 302, location=/articles
+deactivate Laravel
+deactivate Laravel

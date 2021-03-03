@@ -1,0 +1,48 @@
+#https://sequencediagram.org/
+title Edit a Foo
+
+Browser->Laravel: PUT('/articles/1', data)
+activate Laravel
+Laravel->ArticleController: update(i)
+activate ArticleController
+ArticleController->Class Article: find(i)
+activate Class Article
+Class Article->MySQL: SELECT * FROM WHERE id = 1
+activate MySQL
+MySQL-->Class Article: resultset
+deactivate MySQL
+
+Class Article->$article-Article: create(resulset)
+
+Class Article-->ArticleController: $article
+
+ArticleController->Laravel: request('title')
+activate Laravel
+Laravel-->ArticleController: 'My new Article UPDATE'
+deactivate Laravel
+ArticleController->Class Article: title='My new Article UPDATE'
+
+ArticleController->Laravel: request('excerpt')
+activate Laravel
+Laravel-->ArticleController: 'Lorem ...'
+deactivate Laravel
+ArticleController->Class Article: excerp='Lorem ...'
+
+ArticleController->Laravel: request('body')
+activate Laravel
+Laravel-->ArticleController: 'asdf'
+deactivate Laravel
+ArticleController->Class Article: body='asdf'
+
+ArticleController->Class Article: save()
+Class Article->MySQL: UPDATE articles ...
+activate MySQL
+deactivate Class Article
+
+ArticleController-->Laravel: redirect('/articles/1')
+deactivate MySQL
+deactivate ArticleController
+activate Laravel
+Laravel-->Browser: 302, Location='/articles/1/'
+deactivate Laravel
+deactivate Laravel

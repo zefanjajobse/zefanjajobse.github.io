@@ -1,0 +1,41 @@
+#https://sequencediagram.org/
+title Create a Foo
+
+Browser->Laravel: POST('/articles', data)
+activate Laravel
+Laravel->ArticleController: store()
+activate ArticleController
+ArticleController->Article: create
+
+ArticleController->Laravel: request('title')
+activate Laravel
+Laravel-->ArticleController: 'My New Article'
+deactivate Laravel
+ArticleController->Article: title = 'My new Article'
+
+ArticleController->Laravel: request('excerpt')
+activate Laravel
+Laravel-->ArticleController: 'Lorem ...'
+deactivate Laravel
+ArticleController->Article: excerpt='Lorem ...'
+
+ArticleController->Laravel: request('body')
+activate Laravel
+Laravel-->ArticleController: 'asdf'
+deactivate Laravel
+ArticleController->Article: body='asdf'
+
+ArticleController->Article: save()
+activate Article
+Article->MySQL: INSET INTO ...
+deactivate Article
+activate MySQL
+
+ArticleController-->Laravel: redirect('/articles')
+activate Laravel
+deactivate MySQL
+deactivate ArticleController
+
+Laravel-->Browser: 302, location=/articles
+deactivate Laravel
+deactivate Laravel
